@@ -1,7 +1,9 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 import {
   createBrowserRouter,
   RouterProvider,
@@ -12,6 +14,9 @@ import ErrorPage from './shared/ErrorPage.jsx';
 import Login from './Authentication/Login.jsx';
 import Register from './Authentication/Register.jsx';
 import AuthProvider from './Contexts/AuthProvider.jsx';
+import AllScholarships from './pages/AllScholarships.jsx';
+import PrivateRoute from './shared/PrivateRoute.jsx';
+import ScholarshipDetails from './pages/ScholarshipDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +27,16 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/allScholarship",
+        element: <AllScholarships></AllScholarships>
+      },
+      {
+        path: "/scholarships/:id",
+        element: <PrivateRoute>
+          <ScholarshipDetails></ScholarshipDetails>
+        </PrivateRoute>,
       },
       {
         path: "/login",
@@ -37,8 +52,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <QueryClientProvider client ={queryClient}>
     <AuthProvider>
     <RouterProvider router={router} />
     </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>,
 )

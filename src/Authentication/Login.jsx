@@ -141,13 +141,13 @@ const Login = () => {
           />
 
           <div>
-            <button type="button" className="link link-hover text-violet-700">
+            <button type="button" className="link link-hover text-secondary">
               Forgot password?
             </button>
           </div>
 
           <button
-            className="btn bg-violet-600 hover:bg-violet-700 text-white mt-4"
+            className="btn bg-secondary hover:bg-[#994B4B] text-white mt-4"
             type="submit"
           >
             Login
@@ -164,7 +164,7 @@ const Login = () => {
 
           <p className="pt-5 text-center">
             Don't have an account?{" "}
-            <Link to="/register" className="text-violet-600 underline">
+            <Link to="/register" className="text-secondary underline">
               Register
             </Link>
           </p>

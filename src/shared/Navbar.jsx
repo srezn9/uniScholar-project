@@ -74,7 +74,7 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to="/ allScholarship"
+          to="/allScholarship"
           className={({ isActive }) =>
             isActive
               ? "underline text-secondary font-semibold"
@@ -195,7 +195,7 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={handleLogout}
-                  className="btn bg-violet-900 text-white w-full"
+                  className="btn bg-secondary text-white w-full"
                 >
                   Logout
                 </button>
@@ -204,10 +204,10 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <Link to="/login" className="btn bg-violet-500 text-white">
+            <Link to="/login" className="btn bg-secondary text-white">
               Login
             </Link>
-            <Link to="/register" className="btn bg-violet-700 text-white">
+            <Link to="/register" className="rounded-2xl btn bg-secondary text-white">
               Register
             </Link>
           </>

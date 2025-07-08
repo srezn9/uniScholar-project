@@ -66,7 +66,7 @@ const Register = () => {
     register(email, password)
       .then(() => {
         updateUserProfile({ displayName: name, photoURL });
-        showToast("success", "Registration successful! Welcome!");
+        showToast("success", "You have succesfully registered to UniScholar");
         navigate("/");
       })
       .catch((error) => {
@@ -77,7 +77,7 @@ const Register = () => {
   const handleGoogleLogin = () => {
     googleLogin()
       .then(() => {
-        showToast("success", "Logged in with Google!");
+        showToast("success", "You have succesfully logged in with Google!");
         navigate("/");
       })
       .catch((error) => {
@@ -139,14 +139,14 @@ const Register = () => {
             />
             <label htmlFor="terms" className="text-sm">
               I accept the{" "}
-              <Link to="/terms" className="text-violet-600 underline">
+              <Link to="/terms" className="text-secondary underline">
                 Terms and Conditions
               </Link>
             </label>
           </div>
 
           <button
-            className="btn bg-violet-600 hover:bg-violet-700 text-white mt-4"
+            className="btn bg-secondary hover:bg-[#994B4B] text-white mt-4"
             type="submit"
             disabled={!accepted}
           >
@@ -162,9 +162,9 @@ const Register = () => {
             Continue with Google
           </button>
 
-          <p className="pt-5 text-center text-violet-950">
+          <p className="pt-5 text-center text-secondary">
             Already have an account?{" "}
-            <Link to="/login" className="text-violet-600 underline">
+            <Link to="/login" className="text-secondary underline">
               Login
             </Link>
           </p>
