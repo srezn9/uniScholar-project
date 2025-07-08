@@ -1,0 +1,239 @@
+[
+  {
+    "id": "scholarship1",
+    "universityName": "Harvard University",
+    "universityLogo": "https://i.postimg.cc/263BhMrH/somesh-kesarla-suresh-h-Wqr-I3-Cy-Pu-M-unsplash.jpg ",
+    "scholarshipCategory": "Undergraduate",
+    "location": { "country": "USA", "city": "Cambridge" },
+    "applicationDeadline": "2025-12-31",
+    "subjectName": "Computer Science",
+    "scholarshipDescription": "Full tuition coverage plus monthly stipend for outstanding students.",
+    "stipend": 1500,
+    "postDate": "2025-01-15",
+    "serviceCharge": 50,
+    "applicationFees": 25,
+    "reviews": [
+      {
+        "reviewerImage": "https://i.postimg.cc/3xmCnnd8/v3-0416757.jpg",
+        "reviewerName": "John Doe",
+        "reviewDate": "2025-03-10",
+        "ratingPoint": 4.5,
+        "comments": "Great scholarship, helped me a lot financially."
+      },
+      {
+        "reviewerImage": "https://i.postimg.cc/j5K8zBcY/v3-0025297.jpg",
+        "reviewerName": "Sara Lee",
+        "reviewDate": "2025-04-02",
+        "ratingPoint": 5,
+        "comments": "Easy application process and excellent support from the university."
+      }
+    ]
+  },
+  {
+    "id": "scholarship2",
+    "universityName": "Oxford University",
+    "universityLogo": "https://i.postimg.cc/Dyc1XtGT/ben-seymour-nq-BUTBs-DQNM-unsplash.jpg",
+    "scholarshipCategory": "Postgraduate",
+    "location": { "country": "UK", "city": "Oxford" },
+    "applicationDeadline": "2025-11-15",
+    "subjectName": "Law",
+    "scholarshipDescription": "Partial tuition waiver for international students.",
+    "stipend": 1000,
+    "postDate": "2025-02-10",
+    "serviceCharge": 40,
+    "applicationFees": 30,
+    "reviews": [
+      {
+        "reviewerImage": "https://i.postimg.cc/jdZrC4sj/v3-0037658.jpg",
+        "reviewerName": "Michael Smith",
+        "reviewDate": "2025-04-01",
+        "ratingPoint": 4,
+        "comments": "Good scholarship but application fees are a bit high."
+      }
+    ]
+  },
+  {
+    "id": "scholarship3",
+    "universityName": "Stanford University",
+    "universityLogo": "https://i.postimg.cc/sg7dm4Vs/robert-gareth-ge2fkbf-R6-U-unsplash.jpg",
+    "scholarshipCategory": "PhD",
+    "location": { "country": "USA", "city": "Stanford" },
+    "applicationDeadline": "2025-10-20",
+    "subjectName": "Engineering",
+    "scholarshipDescription": "Comprehensive scholarship for PhD candidates with research funding.",
+    "stipend": 2000,
+    "postDate": "2025-01-25",
+    "serviceCharge": 60,
+    "applicationFees": 20,
+    "reviews": [
+      {
+        "reviewerImage": "https://i.postimg.cc/YCrqsSSv/v3-0337952.jpg",
+        "reviewerName": "Anna Brown",
+        "reviewDate": "2025-03-15",
+        "ratingPoint": 4.8,
+        "comments": "Excellent funding and resources for research."
+      }
+    ]
+  },
+  {
+    "id": "scholarship4",
+    "universityName": "University of Toronto",
+    "universityLogo": "https://i.postimg.cc/d17z72Nb/dora-dalberto-ORz-Zt-Y2i50k-unsplash.jpg",
+    "scholarshipCategory": "Undergraduate",
+    "location": { "country": "Canada", "city": "Toronto" },
+    "applicationDeadline": "2025-12-01",
+    "subjectName": "Business Administration",
+    "scholarshipDescription": "Merit-based scholarship for undergraduate business students.",
+    "stipend": 1200,
+    "postDate": "2025-02-05",
+    "serviceCharge": 30,
+    "applicationFees": 15,
+    "reviews": [
+      {
+        "reviewerImage": "https://i.postimg.cc/ZnvJ69jQ/v3-0261429.jpg",
+        "reviewerName": "David Wilson",
+        "reviewDate": "2025-03-22",
+        "ratingPoint": 4.3,
+        "comments": "Good support but application fee was a bit high."
+      }
+    ]
+  },
+  {
+    "id": "scholarship5",
+    "universityName": "University of Melbourne",
+    "universityLogo": "https://i.postimg.cc/hPMpBJpT/josh-chiodo-3n-Jb-SGBKH8-U-unsplash.jpg",
+    "scholarshipCategory": "Postgraduate",
+    "location": { "country": "Australia", "city": "Melbourne" },
+    "applicationDeadline": "2025-11-30",
+    "subjectName": "Medicine",
+    "scholarshipDescription": "Scholarship for postgraduate medical students with clinical research opportunities.",
+    "stipend": 1800,
+    "postDate": "2025-01-30",
+    "serviceCharge": 40,
+    "applicationFees": 20,
+    "reviews": [
+      {
+        "reviewerImage": "https://i.postimg.cc/LsPkQv54/v3-0614267.jpg",
+        "reviewerName": "Emily Johnson",
+        "reviewDate": "2025-04-10",
+        "ratingPoint": 4.7,
+        "comments": "Amazing opportunity for medical students."
+      }
+    ]
+  },
+  {
+    "id": "scholarship6",
+    "universityName": "National University of Singapore",
+    "universityLogo": "https://i.postimg.cc/sX9548L7/chuttersnap-8bf-A3-UD-tqs-unsplash.jpg",
+    "scholarshipCategory": "Undergraduate",
+    "location": { "country": "Singapore", "city": "Singapore" },
+    "applicationDeadline": "2025-12-20",
+    "subjectName": "Architecture",
+    "scholarshipDescription": "Support for undergraduate architecture students with creative projects.",
+    "stipend": 1100,
+    "postDate": "2025-02-15",
+    "serviceCharge": 35,
+    "applicationFees": 18,
+    "reviews": [
+      {
+        "reviewerImage": "https://i.postimg.cc/vB1JNJ9g/v3-0415733.jpg",
+        "reviewerName": "Jason Tan",
+        "reviewDate": "2025-03-30",
+        "ratingPoint": 4.1,
+        "comments": "Good scholarship for aspiring architects."
+      }
+    ]
+  },
+  {
+    "id": "scholarship7",
+    "universityName": "ETH Zurich",
+    "universityLogo": "https://i.postimg.cc/KvV3BxYC/josip-ivankovic-y-ZW-3-LPsss8-unsplash.jpg",
+    "scholarshipCategory": "PhD",
+    "location": { "country": "Switzerland", "city": "Zurich" },
+    "applicationDeadline": "2025-10-10",
+    "subjectName": "Physics",
+    "scholarshipDescription": "Funding for PhD students in physics with access to top labs.",
+    "stipend": 2100,
+    "postDate": "2025-01-10",
+    "serviceCharge": 55,
+    "applicationFees": 22,
+    "reviews": [
+      {
+        "reviewerImage": "https://i.postimg.cc/nzwWK0PF/v3-0382463.jpg",
+        "reviewerName": "Laura Müller",
+        "reviewDate": "2025-03-05",
+        "ratingPoint": 4.9,
+        "comments": "Excellent facilities and research funding."
+      }
+    ]
+  },
+  {
+    "id": "scholarship8",
+    "universityName": "University of Tokyo",
+    "universityLogo": "https://i.postimg.cc/7Z0hzzdT/note-thanun-9wh-N2-EWyj9k-unsplash.jpg",
+    "scholarshipCategory": "Postgraduate",
+    "location": { "country": "Japan", "city": "Tokyo" },
+    "applicationDeadline": "2025-11-25",
+    "subjectName": "International Relations",
+    "scholarshipDescription": "Scholarship supporting postgraduate studies in international relations.",
+    "stipend": 1400,
+    "postDate": "2025-02-20",
+    "serviceCharge": 38,
+    "applicationFees": 19,
+    "reviews": [
+      {
+        "reviewerImage": "https://i.postimg.cc/wMj6Mfs9/v3-0344789.jpg",
+        "reviewerName": "Kenji Saito",
+        "reviewDate": "2025-04-03",
+        "ratingPoint": 4.4,
+        "comments": "Helpful scholarship with a reasonable application fee."
+      }
+    ]
+  },
+  {
+    "id": "scholarship9",
+    "universityName": "Sorbonne University",
+    "universityLogo": "https://i.postimg.cc/dQgTTJ3p/andrea-fontalvo-ge-RKz-Nl2pjc-unsplash.jpg",
+    "scholarshipCategory": "Undergraduate",
+    "location": { "country": "France", "city": "Paris" },
+    "applicationDeadline": "2025-12-05",
+    "subjectName": "Philosophy",
+    "scholarshipDescription": "Support for undergraduate philosophy students in Europe.",
+    "stipend": 900,
+    "postDate": "2025-02-28",
+    "serviceCharge": 30,
+    "applicationFees": 12,
+    "reviews": [
+      {
+        "reviewerImage": "https://i.postimg.cc/rw3zbkRx/v3-0113656.jpg",
+        "reviewerName": "Claire Dupont",
+        "reviewDate": "2025-03-28",
+        "ratingPoint": 4.2,
+        "comments": "Great chance to study philosophy abroad."
+      }
+    ]
+  },
+  {
+    "id": "scholarship10",
+    "universityName": "University of Cape Town",
+    "universityLogo": "https://i.postimg.cc/gkP2Wjnz/andy-wang-l-EQZa-Rjh-f-I-unsplash.jpg",
+    "scholarshipCategory": "Postgraduate",
+    "location": { "country": "South Africa", "city": "Cape Town" },
+    "applicationDeadline": "2025-11-10",
+    "subjectName": "Environmental Science",
+    "scholarshipDescription": "Scholarship for postgraduate studies focused on environmental sustainability.",
+    "stipend": 1300,
+    "postDate": "2025-01-20",
+    "serviceCharge": 45,
+    "applicationFees": 20,
+    "reviews": [
+      {
+        "reviewerImage": "https://i.postimg.cc/gJRh40Mx/v3-0395374.jpg",
+        "reviewerName": "Sipho Nkosi",
+        "reviewDate": "2025-03-18",
+        "ratingPoint": 4.6,
+        "comments": "Helpful scholarship for environmental studies."
+      }
+    ]
+  }
+]
