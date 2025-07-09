@@ -17,6 +17,11 @@ import AuthProvider from './Contexts/AuthProvider.jsx';
 import AllScholarships from './pages/AllScholarships.jsx';
 import PrivateRoute from './shared/PrivateRoute.jsx';
 import ScholarshipDetails from './pages/ScholarshipDetails.jsx';
+import { Elements } from '@stripe/react-stripe-js';
+import Checkout from './Payments/Checkout.jsx';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const router = createBrowserRouter([
   {
@@ -38,6 +43,16 @@ const router = createBrowserRouter([
           <ScholarshipDetails></ScholarshipDetails>
         </PrivateRoute>,
       },
+      {
+         path: "/checkout/:id",
+         element: (
+           <PrivateRoute>
+          <Elements stripe={stripePromise}>
+        <Checkout />
+        </Elements>
+        </PrivateRoute>
+  )
+},
       {
         path: "/login",
         element: <Login></Login>,

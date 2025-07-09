@@ -4,8 +4,8 @@ const ReviewCard = ({ review }) => {
   const { reviewerImage, reviewerName, reviewDate, ratingPoint, comments } = review;
 
   return (
-    <div className="p-4 bg-gray-50 rounded-lg shadow-md text-gray-800">
-      <div className="flex items-center mb-2">
+    <div className="p-5 h-full bg-white border border-blue-200 rounded-xl shadow-lg text-gray-800 transition-transform duration-300 hover:scale-[1.02]">
+      <div className="flex items-center mb-3">
         <img
           src={reviewerImage}
           alt={reviewerName}
@@ -16,11 +16,10 @@ const ReviewCard = ({ review }) => {
           <p className="text-xs text-gray-500">{new Date(reviewDate).toLocaleDateString()}</p>
         </div>
       </div>
-      <p className="mb-2 font-semibold">Rating: ⭐ {ratingPoint}</p>
-      <p className="text-sm">{comments}</p>
+      <p className="mb-2 font-semibold text-yellow-500">⭐ {ratingPoint}</p>
+      <p className="text-sm text-gray-700">{comments}</p>
     </div>
   );
 };
-
 
 export default ReviewCard;
