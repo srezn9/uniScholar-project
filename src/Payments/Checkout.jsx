@@ -219,7 +219,7 @@ const Checkout = () => {
             className="input input-bordered w-full bg-gray-100"
           />
 
-          <button type="submit" className="btn btn-success w-full">
+          <button type="submit" className="btn btn-secondary w-full">
             Submit Application
           </button>
         </form>
