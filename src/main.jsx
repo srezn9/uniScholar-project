@@ -21,6 +21,7 @@ import UserDashboard from "./Dashboards/UserDashboard.jsx/UserDashboard.jsx";
 import MyProfile from "./Dashboards/UserDashboard.jsx/MyProfile.jsx";
 import MyApplications from "./Dashboards/UserDashboard.jsx/MyApplications.jsx";
 import MyReviews from "./Dashboards/UserDashboard.jsx/MyReviews.jsx";
+import EditApplication from "./Dashboards/UserDashboard.jsx/EditApplication.jsx";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: "reviews",
         element: <MyReviews />,
+      },
+      {
+        path: "edit-application/:id",
+        element: <EditApplication />,
       },
     ],
   },
