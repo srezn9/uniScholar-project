@@ -9,10 +9,9 @@ import {
   updateProfile,
 } from "firebase/auth";
 
-
-
 import { AuthContext } from "./AuthContext";
 import { auth } from "../firebase.init";
+
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -45,23 +44,20 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       setLoading(false);
 
-      
-      if (currentUser?.email) {
-        try {
-          const res = await fetch("https://tutor-sphere-server.vercel.app/users", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              name: currentUser.displayName || "No Name",
-              email: currentUser.email,
-            }),
-          });
-          await res.json();
-          // console.log("User sent to DB:", data);
-        } catch (error) {
-          console.error(" Failed to send user to DB:", error);
-        }
-      }
+    
+
+      // if (currentUser?.email) {
+      //   try {
+      //     await axios.post("http://localhost:5000/users", {
+      //       name: currentUser.displayName || "No Name",
+      //       email: currentUser.email,
+      //       // You can add `role: "moderator"` manually here for testing, or let the backend default it
+      //     });
+      //     // console.log("User sent to DB:", data);
+      //   } catch (error) {
+      //     console.error(" Failed to send user to DB:", error);
+      //   }
+      // }
     });
 
     return () => unsubscribe();

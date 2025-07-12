@@ -1,5 +1,4 @@
 import { Navigate, useLocation } from "react-router";
-;
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
@@ -13,7 +12,7 @@ const ModeratorRoute = ({ children }) => {
     queryKey: ["role", user?.email],
     queryFn: async () => {
       const res = await axios.get(`/users/role/${user.email}`);
-      return res.data?.role;
+      return res.data?.role || "moderator"; // Ensure it returns a value
     },
   });
 
@@ -25,7 +24,7 @@ const ModeratorRoute = ({ children }) => {
     return children;
   }
 
-  return <Navigate to="/login" state={{ from: location }} replace />;
+  return <Navigate to="/" state={{ from: location }} replace />;
 };
 
 export default ModeratorRoute;

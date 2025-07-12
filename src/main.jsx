@@ -113,7 +113,7 @@ const router = createBrowserRouter([
         element: <MyProfileModerator></MyProfileModerator>
       },
       {
-        path: "manage-scholarship",
+        path: "manage-scholarships",
         element: <ManageScholarshipModerator></ManageScholarshipModerator>
       },
       {

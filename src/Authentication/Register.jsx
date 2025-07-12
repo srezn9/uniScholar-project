@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 
 // import { Helmet } from "react-helmet-async";
 import { AuthContext } from "../Contexts/AuthContext";
+import axios from "axios";
 
 const Register = () => {
   const { register, updateUserProfile, googleLogin } = useContext(AuthContext);
@@ -46,7 +47,7 @@ const Register = () => {
     }
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
     const photoURL = e.target.photoURL.value;
@@ -63,15 +64,25 @@ const Register = () => {
       );
     }
 
-    register(email, password)
-      .then(() => {
-        updateUserProfile({ displayName: name, photoURL });
-        showToast("success", "You have succesfully registered to UniScholar");
-        navigate("/");
-      })
-      .catch((error) => {
-        showToast("error", getErrorMessage(error));
+    try {
+      // Register user
+      await register(email, password);
+
+      // Update profile
+      await updateUserProfile({ displayName: name, photoURL });
+
+      // Save to DB
+      await axios.post("http://localhost:5000/users", {
+        name,
+        email,
+        role:  email === "emilia@gmail.com" ? "moderator" : "user", // or "user"
       });
+
+      showToast("success", "You have successfully registered to UniScholar");
+      navigate("/");
+    } catch (error) {
+      showToast("error", getErrorMessage(error));
+    }
   };
 
   const handleGoogleLogin = () => {
@@ -90,9 +101,7 @@ const Register = () => {
       {/* <Helmet>
               <title>Register || TutorSphere</title>
             </Helmet> */}
-      <h2 className="text-center p-5 text-3xl font-bold">
-        Register Now
-      </h2>
+      <h2 className="text-center p-5 text-3xl font-bold">Register Now</h2>
       <form onSubmit={handleRegister} className="card-body">
         <fieldset className="fieldset">
           <label className="label">Name</label>
