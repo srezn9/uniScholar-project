@@ -171,7 +171,16 @@ const MyApplications = () => {
                 <td>{index + 1}</td>
                 <td>{app.universityName}</td>
                 <td>{app.address || "—"}</td>
-                <td>{app.feedback || "—"}</td>
+                <td>
+                  {app.feedback ? (
+                    <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-medium">
+                      {app.feedback}
+                    </span>
+                  ) : (
+                    <span className="text-gray-400 text-xs">No feedback</span>
+                  )}
+                </td>
+
                 <td>{app.subjectName}</td>
                 <td>{app.degree}</td>
                 <td>${app.applicationFees}</td>

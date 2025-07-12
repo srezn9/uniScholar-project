@@ -112,13 +112,16 @@ const AllScholarships = () => {
               />
               <h3 className="text-xl font-semibold">{item.universityName}</h3>
               <p className="text-sm text-gray-600">
-                {item.location.city}, {item.location.country}
+                {item.location?.city || item.city || "Unknown City"},{" "}
+                {item.location?.country || item.country || "Unknown Country"}
               </p>
+
               <p className="mt-2">
                 <strong>Subject:</strong> {item.subjectName}
               </p>
               <p className="mt-2">
-                <strong>Scholarship Category:</strong> {item.scholarshipCategory}
+                <strong>Scholarship Category:</strong>{" "}
+                {item.scholarshipCategory}
               </p>
               <p>
                 <strong>Deadline:</strong> {item.applicationDeadline}
@@ -127,7 +130,8 @@ const AllScholarships = () => {
                 <strong>Fees:</strong> ${item.applicationFees}
               </p>
               <p>
-                <strong>Rating:</strong> ⭐ {calculateAverageRating(item.reviews)}
+                <strong>Rating:</strong> ⭐{" "}
+                {calculateAverageRating(item.reviews)}
               </p>
               <button
                 onClick={() => navigate(`/scholarships/${item._id}`)}

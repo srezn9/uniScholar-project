@@ -109,7 +109,7 @@ const router = createBrowserRouter([
     ),
     children:[
       {
-        inex: true,
+        index: true,
         element: <MyProfileModerator></MyProfileModerator>
       },
       {
@@ -127,7 +127,7 @@ const router = createBrowserRouter([
       {
         path: "add-scholarship",
         element: <AddScholarshipModerator></AddScholarshipModerator>
-      }
+      },
     ]
   }
 ]);
