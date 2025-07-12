@@ -3,9 +3,8 @@ import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
 import Swal from "sweetalert2";
 
-
 const Navbar = () => {
-    const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   // Theme state
   //   const [theme, setTheme] = useState(() => {
@@ -21,42 +20,42 @@ const Navbar = () => {
   //     setTheme((prev) => (prev === "light" ? "dark" : "light"));
   //   };
 
-    const handleLogout = () => {
-      logout()
-        .then(() => {
-          Swal.fire({
-            title: "Logged Out!",
-            text: "You have been logged out successfully.",
-            icon: "success",
-            iconColor: "#14b8a6",
-            background: "#f5f3ff",
-            color: "#4c1d95",
-            confirmButtonText: "Okay",
-            confirmButtonColor: "#8b5cf6",
-            customClass: {
-              popup: "rounded-xl shadow-lg",
-              confirmButton: "px-4 py-2 text-white font-semibold",
-            },
-            timer: 3000,
-          });
-        })
-        .catch(() => {
-          Swal.fire({
-            title: "Logout Failed",
-            text: "Something went wrong while logging out.",
-            icon: "error",
-            iconColor: "#e11d48",
-            background: "#fdf4ff",
-            color: "#701a75",
-            confirmButtonText: "Retry",
-            confirmButtonColor: "#c084fc",
-            customClass: {
-              popup: "rounded-xl shadow-lg",
-              confirmButton: "px-4 py-2 text-white font-semibold",
-            },
-          });
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        Swal.fire({
+          title: "Logged Out!",
+          text: "You have been logged out successfully.",
+          icon: "success",
+          iconColor: "#14b8a6",
+          background: "#f5f3ff",
+          color: "#4c1d95",
+          confirmButtonText: "Okay",
+          confirmButtonColor: "#8b5cf6",
+          customClass: {
+            popup: "rounded-xl shadow-lg",
+            confirmButton: "px-4 py-2 text-white font-semibold",
+          },
+          timer: 3000,
         });
-    };
+      })
+      .catch(() => {
+        Swal.fire({
+          title: "Logout Failed",
+          text: "Something went wrong while logging out.",
+          icon: "error",
+          iconColor: "#e11d48",
+          background: "#fdf4ff",
+          color: "#701a75",
+          confirmButtonText: "Retry",
+          confirmButtonColor: "#c084fc",
+          customClass: {
+            popup: "rounded-xl shadow-lg",
+            confirmButton: "px-4 py-2 text-white font-semibold",
+          },
+        });
+      });
+  };
 
   const links = (
     <>
@@ -94,6 +93,19 @@ const Navbar = () => {
           }
         >
           User Dashboard
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
+          to="/moderatorDashboard"
+          className={({ isActive }) =>
+            isActive
+              ? "underline text-secondary font-semibold"
+              : "font-semibold"
+          }
+        >
+          Moderator Dashboard
         </NavLink>
       </li>
       <li>
@@ -207,7 +219,10 @@ const Navbar = () => {
             <Link to="/login" className="btn bg-secondary text-white">
               Login
             </Link>
-            <Link to="/register" className="rounded-2xl btn bg-secondary text-white">
+            <Link
+              to="/register"
+              className="rounded-2xl btn bg-secondary text-white"
+            >
               Register
             </Link>
           </>

@@ -83,7 +83,7 @@ const MyApplications = () => {
             });
             refetch();
           }
-        } catch (error) {
+        } catch {
           Swal.fire({
             icon: "error",
             title: "Failed!",
@@ -109,16 +109,17 @@ const MyApplications = () => {
     const review = {
       rating: parseInt(data.rating),
       comment: data.comment,
-      date: new Date().toISOString(),
+      date: data.date,
       scholarshipId: selectedApp.scholarshipId,
-      scholarshipName:
-        selectedApp.subjectName || selectedApp.scholarshipCategory || "N/A",
+      scholarshipName: selectedApp.scholarshipName || "N/A",
       universityName: selectedApp.universityName || "Unknown University",
-      universityId: selectedApp.scholarshipId, // using scholarshipId as fallback
+      universityId: selectedApp.universityId, // ✅ correct this
       userName: user?.displayName || "Anonymous",
       userEmail: user?.email,
       userImage: user?.photoURL || null,
     };
+
+    console.log("Submitting Review:", review);
 
     try {
       const res = await axios.post("http://localhost:5000/reviews", review);
@@ -292,8 +293,9 @@ const MyApplications = () => {
                 <button
                   type="submit"
                   className="btn btn-sm bg-primary text-white"
+                  disabled={isSubmitting}
                 >
-                  Submit Review
+                  {isSubmitting ? "Submitting..." : "Submit Review"}
                 </button>
               </div>
             </form>

@@ -1,9 +1,10 @@
-hover:bg-[#994B4B] pink
-hover:bg-[#3A3640] gray
+
 
 [
   {
     "id": "scholarship1",
+    "scholarshipName": "Merit-Based Advanced Scholarship",
+    "universityId": "univ001",
     "universityName": "Harvard University",
     "universityLogo": "https://i.postimg.cc/263BhMrH/somesh-kesarla-suresh-h-Wqr-I3-Cy-Pu-M-unsplash.jpg ",
     "scholarshipCategory": "Undergraduate",
@@ -34,6 +35,8 @@ hover:bg-[#3A3640] gray
   },
   {
     "id": "scholarship2",
+     "scholarshipName": "Global Law Advancement Grant",
+    "universityId": "univ002",
     "universityName": "Oxford University",
     "universityLogo": "https://i.postimg.cc/Dyc1XtGT/ben-seymour-nq-BUTBs-DQNM-unsplash.jpg",
     "scholarshipCategory": "Postgraduate",
@@ -57,6 +60,8 @@ hover:bg-[#3A3640] gray
   },
   {
     "id": "scholarship3",
+    "scholarshipName": "Engineering Innovation Fellowship",
+    "universityId": "univ003",
     "universityName": "Stanford University",
     "universityLogo": "https://i.postimg.cc/sg7dm4Vs/robert-gareth-ge2fkbf-R6-U-unsplash.jpg",
     "scholarshipCategory": "PhD",
@@ -80,6 +85,8 @@ hover:bg-[#3A3640] gray
   },
   {
     "id": "scholarship4",
+    "scholarshipName": "Business Excellence Award",
+    "universityId": "univ004",
     "universityName": "University of Toronto",
     "universityLogo": "https://i.postimg.cc/d17z72Nb/dora-dalberto-ORz-Zt-Y2i50k-unsplash.jpg",
     "scholarshipCategory": "Undergraduate",
@@ -103,6 +110,8 @@ hover:bg-[#3A3640] gray
   },
   {
     "id": "scholarship5",
+     "scholarshipName": "Medical Research Opportunity Grant",
+    "universityId": "univ005",
     "universityName": "University of Melbourne",
     "universityLogo": "https://i.postimg.cc/hPMpBJpT/josh-chiodo-3n-Jb-SGBKH8-U-unsplash.jpg",
     "scholarshipCategory": "Postgraduate",
@@ -126,6 +135,8 @@ hover:bg-[#3A3640] gray
   },
   {
     "id": "scholarship6",
+     "scholarshipName": "Creative Architecture Scholars Fund",
+    "universityId": "univ006",
     "universityName": "National University of Singapore",
     "universityLogo": "https://i.postimg.cc/sX9548L7/chuttersnap-8bf-A3-UD-tqs-unsplash.jpg",
     "scholarshipCategory": "Undergraduate",
@@ -149,6 +160,8 @@ hover:bg-[#3A3640] gray
   },
   {
     "id": "scholarship7",
+     "scholarshipName": "Quantum Research Scholars Program",
+    "universityId": "univ007",
     "universityName": "ETH Zurich",
     "universityLogo": "https://i.postimg.cc/KvV3BxYC/josip-ivankovic-y-ZW-3-LPsss8-unsplash.jpg",
     "scholarshipCategory": "PhD",
@@ -172,6 +185,8 @@ hover:bg-[#3A3640] gray
   },
   {
     "id": "scholarship8",
+    "scholarshipName": "Global Diplomacy Studies Grant",
+    "universityId": "univ008",
     "universityName": "University of Tokyo",
     "universityLogo": "https://i.postimg.cc/7Z0hzzdT/note-thanun-9wh-N2-EWyj9k-unsplash.jpg",
     "scholarshipCategory": "Postgraduate",
@@ -195,6 +210,8 @@ hover:bg-[#3A3640] gray
   },
   {
     "id": "scholarship9",
+    "scholarshipName": "Philosophy Study Abroad Award",
+    "universityId": "univ009",
     "universityName": "Sorbonne University",
     "universityLogo": "https://i.postimg.cc/dQgTTJ3p/andrea-fontalvo-ge-RKz-Nl2pjc-unsplash.jpg",
     "scholarshipCategory": "Undergraduate",
@@ -218,6 +235,8 @@ hover:bg-[#3A3640] gray
   },
   {
     "id": "scholarship10",
+     "scholarshipName": "Eco-Sustainability Masters Fellowship",
+    "universityId": "univ010",
     "universityName": "University of Cape Town",
     "universityLogo": "https://i.postimg.cc/gkP2Wjnz/andy-wang-l-EQZa-Rjh-f-I-unsplash.jpg",
     "scholarshipCategory": "Postgraduate",

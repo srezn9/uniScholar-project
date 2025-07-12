@@ -22,6 +22,13 @@ import MyProfile from "./Dashboards/UserDashboard.jsx/MyProfile.jsx";
 import MyApplications from "./Dashboards/UserDashboard.jsx/MyApplications.jsx";
 import MyReviews from "./Dashboards/UserDashboard.jsx/MyReviews.jsx";
 import EditApplication from "./Dashboards/UserDashboard.jsx/EditApplication.jsx";
+import ModeratorRoute from "./Dashboards/ModeratorDashboard/ModeratorRoute/ModeratorRoute.jsx";
+import ModeratorDashboard from "./Dashboards/ModeratorDashboard/ModeratorDashboard.jsx";
+import MyProfileModerator from "./Dashboards/ModeratorDashboard/MyProfileModerator.jsx";
+import ManageScholarshipModerator from "./Dashboards/ModeratorDashboard/ManageScholarshipModerator.jsx";
+import AllApplicationModerator from "./Dashboards/ModeratorDashboard/AllApplicationModerator.jsx";
+import AllReviewsModerator from "./Dashboards/ModeratorDashboard/AllReviewsModerator.jsx";
+import AddScholarshipModerator from "./Dashboards/ModeratorDashboard/AddScholarshipModerator.jsx";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -93,6 +100,36 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/moderatorDashboard",
+    element: (
+      <ModeratorRoute>
+        <ModeratorDashboard></ModeratorDashboard>
+      </ModeratorRoute>
+    ),
+    children:[
+      {
+        inex: true,
+        element: <MyProfileModerator></MyProfileModerator>
+      },
+      {
+        path: "manage-scholarship",
+        element: <ManageScholarshipModerator></ManageScholarshipModerator>
+      },
+      {
+        path: "all-reviews",
+        element: <AllReviewsModerator></AllReviewsModerator>
+      },
+      {
+        path:"all-applications",
+        element: <AllApplicationModerator></AllApplicationModerator>
+      },
+      {
+        path: "add-scholarship",
+        element: <AddScholarshipModerator></AddScholarshipModerator>
+      }
+    ]
+  }
 ]);
 
 createRoot(document.getElementById("root")).render(
