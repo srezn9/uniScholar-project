@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../shared/Loader";
 
 // Fetch function (no useState here)
 const fetchAllApplications = async () => {
@@ -66,7 +67,7 @@ const AllApplicationModerator = () => {
     });
   };
 
-  if (isLoading) return <div className="p-6 text-center">Loading...</div>;
+  if (isLoading) return <Loader></Loader>;
   if (isError)
     return <div className="p-6 text-red-500">Failed to load applications</div>;
 

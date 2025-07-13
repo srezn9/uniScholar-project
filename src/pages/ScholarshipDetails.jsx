@@ -10,6 +10,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import ReviewCard from "../components/ReviewCard";
+import Loader from "../shared/Loader";
 
 // Fetch single scholarship by ID
 const fetchScholarshipById = async (id) => {
@@ -33,7 +34,7 @@ const ScholarshipDetails = () => {
     queryFn: () => fetchScholarshipById(id),
   });
 
-  if (isLoading) return <div className="text-center py-10">Loading...</div>;
+  if (isLoading) return <Loader></Loader>;
 
   if (isError)
     return (

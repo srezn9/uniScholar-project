@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+import Loader from "../../shared/Loader";
 
 const MyProfileModerator = () => {
   const { user } = useAuth();
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    if (user?.email) {
+      axios
+        .get(`http://localhost:5000/users/role/${user.email}`)
+        .then((res) => setRole(res.data.role))
+        .catch(() => setRole("user")); // fallback
+    }
+  }, [user]);
 
   if (!user) {
-    return <div className="text-center mt-20">Loading user info...</div>;
+    return <Loader></Loader>;
   }
 
   return (
@@ -20,14 +32,12 @@ const MyProfileModerator = () => {
       </h2>
       <p className="text-gray-600">{user.email}</p>
 
-      {/* Show role only if NOT 'user' */}
-      {user.role && user.role !== "user" && (
+      {/* Show role if not 'user' */}
+      {role && role !== "user" && (
         <p className="mt-2 inline-block bg-secondary text-white text-sm font-medium px-4 py-1 rounded-full">
-          {user.role.toUpperCase()}
+          {role.toUpperCase()}
         </p>
       )}
-
-      {/* Optional: show when account was created, etc. */}
     </div>
   );
 };

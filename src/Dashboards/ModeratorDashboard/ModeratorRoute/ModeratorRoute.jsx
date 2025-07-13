@@ -2,6 +2,7 @@ import { Navigate, useLocation } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
+import Loader from "../../../shared/Loader";
 
 const ModeratorRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -17,7 +18,7 @@ const ModeratorRoute = ({ children }) => {
   });
 
   if (loading || isLoading) {
-    return <div className="text-center mt-20">Loading...</div>;
+    return <Loader></Loader>;
   }
 
   if (user && roleData === "moderator") {

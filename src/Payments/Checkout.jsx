@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../hooks/useAuth";
+import Loader from "../shared/Loader";
 
 const Checkout = () => {
   const { id } = useParams();
@@ -23,7 +24,11 @@ const Checkout = () => {
   } = useForm();
 
   // Load scholarship (GET)
-  const { data: scholarship = {} } = useQuery({
+  const {
+    data: scholarship,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["scholarship", id],
     queryFn: async () => {
       const res = await axios.get(`http://localhost:5000/scholarships/${id}`);
@@ -45,6 +50,20 @@ const Checkout = () => {
         );
     }
   }, [scholarship]);
+
+  if (isLoading) {
+    return (
+      <Loader></Loader>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="text-center py-10 text-red-500 font-semibold">
+        Failed to load scholarship data.
+      </div>
+    );
+  }
 
   // Stripe Payment
   const handleStripePayment = async (e) => {

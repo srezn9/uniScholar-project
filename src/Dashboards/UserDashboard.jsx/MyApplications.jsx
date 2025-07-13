@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import Loader from "../../shared/Loader";
 
 const MyApplications = () => {
   const { user } = useAuth();
@@ -141,7 +142,7 @@ const MyApplications = () => {
     }
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader></Loader>;
 
   return (
     <div className="overflow-x-auto">

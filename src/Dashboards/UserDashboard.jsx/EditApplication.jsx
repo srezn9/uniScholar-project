@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
+import Loader from "../../shared/Loader";
 
 const EditApplication = () => {
   const { id } = useParams();
@@ -51,7 +52,7 @@ const EditApplication = () => {
     }
   };
 
-  if (isLoading) return <p className="text-center">Loading...</p>;
+  if (isLoading) return <Loader></Loader>;
   if (isError)
     return (
       <p className="text-center text-red-500">Failed to load application</p>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Loader from "../../shared/Loader";
 
 const AllReviewsModerator = () => {
   const [localReviews, setLocalReviews] = useState([]);
@@ -89,7 +90,7 @@ const AllReviewsModerator = () => {
     });
   };
 
-  if (isLoading) return <p className="text-center">Loading reviews...</p>;
+  if (isLoading) return <Loader></Loader>;
   if (isError)
     return <p className="text-center text-red-500">Failed to load reviews.</p>;
 

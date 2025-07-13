@@ -4,6 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
+import Loader from "../../shared/Loader";
 
 const MyReviews = () => {
   const { user } = useAuth();
@@ -74,7 +75,7 @@ const MyReviews = () => {
     }
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loader></Loader>;
 
   return (
     <div className="overflow-x-auto">

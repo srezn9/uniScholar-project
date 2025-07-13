@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router";
+import Loader from "../shared/Loader";
 
 const TopScholarships = () => {
   const navigate = useNavigate();
@@ -18,11 +19,11 @@ const TopScholarships = () => {
     return (total / reviews.length).toFixed(1);
   };
 
-  if (isLoading) return <p className="text-center text-lg font-semibold">Loading...</p>;
+  if (isLoading) return <Loader></Loader>;
 
   return (
     <div className="my-12 px-4">
-      <h2 className="text-3xl font-bold text-center mb-10 text-gray-800">
+      <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-10">
         🎓 Top Scholarships
       </h2>
 

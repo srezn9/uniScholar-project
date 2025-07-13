@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router"; // ✅ fixed import
+import Loader from "../shared/Loader";
 
 // Fetching all scholarships
 const fetchScholarships = async () => {
@@ -64,9 +65,7 @@ const AllScholarships = () => {
 
   // Loading state
   if (isLoading) {
-    return (
-      <div className="text-center py-10 text-lg font-semibold">Loading...</div>
-    );
+    return <Loader></Loader>
   }
 
   // Error state
