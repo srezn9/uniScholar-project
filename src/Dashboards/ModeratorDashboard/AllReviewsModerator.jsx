@@ -9,7 +9,7 @@ const AllReviewsModerator = () => {
   const { data: reviews = [], refetch } = useQuery({
     queryKey: ["all-reviews"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/all-reviews");
+      const res = await axios.get("https://unischolar-server.vercel.app/all-reviews");
       return res.data;
     },
   });
@@ -28,7 +28,7 @@ const AllReviewsModerator = () => {
     try {
       if (review.from === "collection") {
         const res = await axios.delete(
-          `http://localhost:5000/reviews/${review._id}`
+          `https://unischolar-server.vercel.app/reviews/${review._id}`
         );
         if (res.data.deletedCount > 0) {
           Swal.fire("Deleted!", "Review has been deleted.", "success");
@@ -37,7 +37,7 @@ const AllReviewsModerator = () => {
       } else if (review.from === "embedded") {
         const scholarshipId = review._id.split("_")[0]; // extract real ObjectId
         const res = await axios.delete(
-          `http://localhost:5000/embedded-reviews/${scholarshipId}`,
+          `https://unischolar-server.vercel.app/embedded-reviews/${scholarshipId}`,
           {
             data: {
               reviewerName: review.reviewerName,

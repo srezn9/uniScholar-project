@@ -6,7 +6,7 @@ import Loader from "../../shared/Loader";
 
 // Fetch function (no useState here)
 const fetchAllApplications = async () => {
-  const res = await axios.get("http://localhost:5000/applied-scholarships/all");
+  const res = await axios.get("https://unischolar-server.vercel.app/applied-scholarships/all");
   return res.data;
 };
 
@@ -31,7 +31,7 @@ const AllApplicationModerator = () => {
 
     try {
       const res = await axios.put(
-        `http://localhost:5000/applied-scholarships/${feedbackApp._id}`,
+        `https://unischolar-server.vercel.app/applied-scholarships/${feedbackApp._id}`,
         { feedback: feedbackText }
       );
 
@@ -58,7 +58,7 @@ const AllApplicationModerator = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/applied-scholarships/${id}`)
+          .delete(`https://unischolar-server.vercel.app/applied-scholarships/${id}`)
           .then(() => {
             refetch();
             Swal.fire("Canceled!", "The application has been canceled.", "success");

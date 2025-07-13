@@ -30,7 +30,7 @@ const MyApplications = () => {
     queryKey: ["myApplications", user?.email],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/user-applications/${user?.email}`
+        `https://unischolar-server.vercel.app/user-applications/${user?.email}`
       );
       return res.data;
     },
@@ -41,7 +41,7 @@ const MyApplications = () => {
     queryKey: ["userReviews", user?.email],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/reviews?email=${user?.email}`
+        `https://unischolar-server.vercel.app/reviews?email=${user?.email}`
       );
       return res.data;
     },
@@ -74,7 +74,7 @@ const MyApplications = () => {
       if (result.isConfirmed) {
         try {
           const res = await axios.delete(
-            `http://localhost:5000/applied-scholarships/${id}`
+            `https://unischolar-server.vercel.app/applied-scholarships/${id}`
           );
           if (res.data.deletedCount > 0) {
             Swal.fire({
@@ -123,7 +123,7 @@ const MyApplications = () => {
     console.log("Submitting Review:", review);
 
     try {
-      const res = await axios.post("http://localhost:5000/reviews", review);
+      const res = await axios.post("https://unischolar-server.vercel.app/reviews", review);
       if (res.data.insertedId) {
         Swal.fire("Success!", "Review submitted successfully.", "success");
         setSelectedApp(null);

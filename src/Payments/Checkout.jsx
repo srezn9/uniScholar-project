@@ -28,7 +28,7 @@ const Checkout = () => {
   } = useQuery({
     queryKey: ["scholarship", id],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/scholarships/${id}`);
+      const res = await axios.get(`https://unischolar-server.vercel.app/scholarships/${id}`);
       return res.data;
     },
     enabled: !!id,
@@ -38,7 +38,7 @@ const Checkout = () => {
   useEffect(() => {
     if (scholarship?.applicationFees) {
       axios
-        .post("http://localhost:5000/create-payment-intent", {
+        .post("https://unischolar-server.vercel.app/create-payment-intent", {
           amount: scholarship.applicationFees,
         })
         .then((res) => setClientSecret(res.data.clientSecret))
@@ -104,7 +104,7 @@ const Checkout = () => {
 
       try {
         const res = await axios.post(
-          "http://localhost:5000/applied-scholarships",
+          "https://unischolar-server.vercel.app/applied-scholarships",
           application
         );
         if (res.data.insertedId) {

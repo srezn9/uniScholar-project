@@ -18,7 +18,7 @@ const MyReviews = () => {
     queryKey: ["userReviews", user?.email],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/reviews?email=${user?.email}`
+        `https://unischolar-server.vercel.app/reviews?email=${user?.email}`
       );
       return res.data;
     },
@@ -44,7 +44,7 @@ const MyReviews = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:5000/reviews/${id}`);
+          await axios.delete(`https://unischolar-server.vercel.app/reviews/${id}`);
           Swal.fire("Deleted!", "Your review has been deleted.", "success");
           refetch();
         } catch {
@@ -62,7 +62,7 @@ const MyReviews = () => {
         date: data.date,
       };
       const res = await axios.patch(
-        `http://localhost:5000/reviews/${selectedReview._id}`,
+        `https://unischolar-server.vercel.app/reviews/${selectedReview._id}`,
         updated
       );
       if (res.data.modifiedCount > 0) {

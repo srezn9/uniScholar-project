@@ -8,7 +8,7 @@ import ScholarshipDetailsModal from "./ScholarshipDetailsModal";
 
 // Fetch all scholarships from backend
 const fetchScholarships = async () => {
-  const res = await axios.get("http://localhost:5000/scholarships");
+  const res = await axios.get("https://unischolar-server.vercel.app/scholarships");
   return res.data;
 };
 
@@ -37,7 +37,7 @@ const ManageScholarshipModerator = () => {
 
     if (confirm.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:5000/scholarships/${id}`);
+        await axios.delete(`https://unischolar-server.vercel.app/scholarships/${id}`);
         refetch();
         Swal.fire("Deleted!", "Scholarship has been deleted.", "success");
       } catch {

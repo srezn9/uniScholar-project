@@ -8,7 +8,7 @@ const TopScholarships = () => {
   const { data: scholarships = [], isLoading } = useQuery({
     queryKey: ["top-scholarships"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/scholarships/top");
+      const res = await fetch("https://unischolar-server.vercel.app/scholarships/top");
       return res.json();
     },
   });

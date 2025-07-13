@@ -25,7 +25,7 @@ const EditScholarshipModal = ({ scholarship, onClose, onUpdate }) => {
 
     try {
       const res = await axios.patch(
-        `http://localhost:5000/scholarships/${scholarship._id}`,
+        `https://unischolar-server.vercel.app/scholarships/${scholarship._id}`,
         updatedFields
       );
       if (res.data.modifiedCount > 0 || res.status === 200) {

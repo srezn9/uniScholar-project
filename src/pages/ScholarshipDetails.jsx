@@ -14,7 +14,7 @@ import Loader from "../shared/Loader";
 
 // Fetch single scholarship by ID
 const fetchScholarshipById = async (id) => {
-  const res = await axios.get(`http://localhost:5000/scholarships/${id}`);
+  const res = await axios.get(`https://unischolar-server.vercel.app/scholarships/${id}`);
   return res.data;
 };
 

@@ -20,7 +20,7 @@ const EditApplication = () => {
     queryKey: ["editApplication", id],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/user-applications/${id}`
+        `https://unischolar-server.vercel.app/user-applications/${id}`
       );
       return res.data;
     },
@@ -34,7 +34,7 @@ const EditApplication = () => {
   const onSubmit = async (formData) => {
     try {
       const res = await axios.put(
-        `http://localhost:5000/applied-scholarships/${id}`,
+        `https://unischolar-server.vercel.app/applied-scholarships/${id}`,
         {
           degree: formData.degree,
           address: formData.address,

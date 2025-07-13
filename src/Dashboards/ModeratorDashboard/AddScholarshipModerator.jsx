@@ -42,7 +42,7 @@ const AddScholarshipModerator = () => {
         postedBy: data.postedBy,
       };
 
-      const res = await axios.post("http://localhost:5000/scholarships", scholarshipData);
+      const res = await axios.post("https://unischolar-server.vercel.app/scholarships", scholarshipData);
 
       if (res.data.insertedId || res.data.acknowledged) {
         Swal.fire("Success!", "Scholarship added successfully", "success");

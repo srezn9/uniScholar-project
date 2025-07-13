@@ -6,7 +6,9 @@ import Loader from "../shared/Loader";
 
 // Fetching all scholarships
 const fetchScholarships = async () => {
-  const res = await axios.get("http://localhost:5000/scholarships");
+  const res = await axios.get(
+    "https://unischolar-server.vercel.app/scholarships"
+  );
   return res.data;
 };
 
@@ -42,9 +44,9 @@ const AllScholarships = () => {
     const query = searchText.toLowerCase();
     const result = scholarships.filter((item) => {
       return (
-        item.universityName.toLowerCase().includes(query) ||
-        item.subjectName.toLowerCase().includes(query) ||
-        item.scholarshipCategory.toLowerCase().includes(query)
+        (item.universityName || "").toLowerCase().includes(query) ||
+        (item.subjectName || "").toLowerCase().includes(query) ||
+        (item.scholarshipCategory || "").toLowerCase().includes(query)
       );
     });
     setFiltered(result);
@@ -52,20 +54,24 @@ const AllScholarships = () => {
 
   // Also filter on typing
   useEffect(() => {
-    const query = searchText.toLowerCase();
-    const result = scholarships.filter((item) => {
-      return (
-        item.universityName.toLowerCase().includes(query) ||
-        item.subjectName.toLowerCase().includes(query) ||
-        item.scholarshipCategory.toLowerCase().includes(query)
-      );
-    });
-    setFiltered(result);
+    const delayDebounce = setTimeout(() => {
+      const query = searchText.toLowerCase();
+      const result = scholarships.filter((item) => {
+        return (
+          (item.universityName || "").toLowerCase().includes(query) ||
+          (item.subjectName || "").toLowerCase().includes(query) ||
+          (item.scholarshipCategory || "").toLowerCase().includes(query)
+        );
+      });
+      setFiltered(result);
+    }, 300); // delay 300ms
+
+    return () => clearTimeout(delayDebounce); // cleanup on each render
   }, [searchText, scholarships]);
 
   // Loading state
   if (isLoading) {
-    return <Loader></Loader>
+    return <Loader></Loader>;
   }
 
   // Error state

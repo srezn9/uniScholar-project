@@ -48,7 +48,7 @@ const AuthProvider = ({ children }) => {
 
       // if (currentUser?.email) {
       //   try {
-      //     await axios.post("http://localhost:5000/users", {
+      //     await axios.post("https://unischolar-server.vercel.app/users", {
       //       name: currentUser.displayName || "No Name",
       //       email: currentUser.email,
       //       // You can add `role: "moderator"` manually here for testing, or let the backend default it
