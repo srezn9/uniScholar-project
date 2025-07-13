@@ -65,22 +65,34 @@ const Register = () => {
     }
 
     try {
-      // Register user
+      // Register user in Firebase
       await register(email, password);
 
-      // Update profile
+      // Update Firebase profile
       await updateUserProfile({ displayName: name, photoURL });
 
-      // Save to DB
-      await axios.post("http://localhost:5000/users", {
-        name,
-        email,
-        role:  email === "emilia@gmail.com" ? "moderator" : "user", // or "user"
-      });
+      // Show success toast for Firebase
+      showToast("success", "Registered in Firebase. Saving user...");
 
-      showToast("success", "You have successfully registered to UniScholar");
-      navigate("/");
+      try {
+        // Save to MongoDB
+        await axios.post("http://localhost:5000/users", {
+          name,
+          email,
+          role: "user",
+        });
+
+        showToast("success", "You have successfully registered to UniScholar");
+        navigate("/");
+      } catch (dbError) {
+        console.error("Database save failed:", dbError);
+        showToast(
+          "error",
+          "Registration succeeded, but failed to save user data."
+        );
+      }
     } catch (error) {
+      console.error("Firebase error:", error);
       showToast("error", getErrorMessage(error));
     }
   };

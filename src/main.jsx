@@ -29,6 +29,14 @@ import ManageScholarshipModerator from "./Dashboards/ModeratorDashboard/ManageSc
 import AllApplicationModerator from "./Dashboards/ModeratorDashboard/AllApplicationModerator.jsx";
 import AllReviewsModerator from "./Dashboards/ModeratorDashboard/AllReviewsModerator.jsx";
 import AddScholarshipModerator from "./Dashboards/ModeratorDashboard/AddScholarshipModerator.jsx";
+import AdminProfile from "./Dashboards/AdminDashboard/AdminProfile.jsx";
+import AddScholarshipAdmin from "./Dashboards/AdminDashboard/AddScholarshipAdmin.jsx";
+import ManageScholarshipsAdmin from "./Dashboards/AdminDashboard/ManageScholarshipsAdmin.jsx";
+import ManageApplicationsAdmin from "./Dashboards/AdminDashboard/ManageApplicationsAdmin.jsx";
+import ManageUsersAdmin from "./Dashboards/AdminDashboard/ManageUsersAdmin.jsx";
+import ManageReviewsAdmin from "./Dashboards/AdminDashboard/ManageReviewsAdmin.jsx";
+import AdminRoute from "./Dashboards/AdminDashboard/AdminRoute/AdminRoute.jsx";
+import AdminDashboard from "./Dashboards/AdminDashboard/AdminDashboard.jsx";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -107,29 +115,45 @@ const router = createBrowserRouter([
         <ModeratorDashboard></ModeratorDashboard>
       </ModeratorRoute>
     ),
-    children:[
+    children: [
       {
         index: true,
-        element: <MyProfileModerator></MyProfileModerator>
+        element: <MyProfileModerator></MyProfileModerator>,
       },
       {
         path: "manage-scholarships",
-        element: <ManageScholarshipModerator></ManageScholarshipModerator>
+        element: <ManageScholarshipModerator></ManageScholarshipModerator>,
       },
       {
         path: "all-reviews",
-        element: <AllReviewsModerator></AllReviewsModerator>
+        element: <AllReviewsModerator></AllReviewsModerator>,
       },
       {
-        path:"all-applications",
-        element: <AllApplicationModerator></AllApplicationModerator>
+        path: "all-applications",
+        element: <AllApplicationModerator></AllApplicationModerator>,
       },
       {
         path: "add-scholarship",
-        element: <AddScholarshipModerator></AddScholarshipModerator>
+        element: <AddScholarshipModerator></AddScholarshipModerator>,
       },
-    ]
-  }
+    ],
+  },
+  {
+    path: "/adminDashboard",
+    element: (
+      <AdminRoute>
+        <AdminDashboard />
+      </AdminRoute>
+    ),
+    children: [
+      { path: "", element: <AdminProfile /> },
+      { path: "add-scholarship-admin", element: <AddScholarshipAdmin /> },
+      { path: "manage-scholarships-admin", element: <ManageScholarshipsAdmin /> },
+      { path: "manage-applications-admin", element: <ManageApplicationsAdmin /> },
+      { path: "manage-users-admin", element: <ManageUsersAdmin /> },
+      { path: "manage-reviews-admin", element: <ManageReviewsAdmin /> },
+    ],
+  },
 ]);
 
 createRoot(document.getElementById("root")).render(
