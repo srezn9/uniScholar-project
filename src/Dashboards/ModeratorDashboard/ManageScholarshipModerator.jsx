@@ -4,6 +4,7 @@ import axios from "axios";
 import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import EditScholarshipModal from "./EditScholarshipModal";
+import ScholarshipDetailsModal from "./ScholarshipDetailsModal";
 
 const fetchScholarships = async () => {
   const res = await axios.get("http://localhost:5000/scholarships");
@@ -12,6 +13,8 @@ const fetchScholarships = async () => {
 
 const ManageScholarshipModerator = () => {
   const [selectedScholarship, setSelectedScholarship] = useState(null);
+  const [editScholarship, setEditScholarship] = useState(null);
+  const [detailScholarship, setDetailScholarship] = useState(null);
 
   const {
     data: scholarships = [],
@@ -71,17 +74,15 @@ const ManageScholarshipModerator = () => {
                 <td>${sch.applicationFees}</td>
                 <td className="space-x-2 text-lg">
                   <button
-                    onClick={() => setSelectedScholarship(sch)}
+                    onClick={() => setDetailScholarship(sch)}
                     title="Details"
                   >
                     <FaEye className="text-blue-600" />
                   </button>
-                  <button
-                    onClick={() => setSelectedScholarship(sch)}
-                    title="Edit"
-                  >
+                  <button onClick={() => setEditScholarship(sch)} title="Edit">
                     <FaEdit className="text-green-600" />
                   </button>
+
                   <button onClick={() => handleDelete(sch._id)} title="Delete">
                     <FaTrash className="text-red-600" />
                   </button>
@@ -92,11 +93,19 @@ const ManageScholarshipModerator = () => {
         </table>
       </div>
 
-      {/* Show modal for Edit or Details */}
-      {selectedScholarship && (
+      {/* Details Modal */}
+      {detailScholarship && (
+        <ScholarshipDetailsModal
+          scholarship={detailScholarship}
+          onClose={() => setDetailScholarship(null)}
+        />
+      )}
+
+      {/* Edit Modal */}
+      {editScholarship && (
         <EditScholarshipModal
-          scholarship={selectedScholarship}
-          onClose={() => setSelectedScholarship(null)}
+          scholarship={editScholarship}
+          onClose={() => setEditScholarship(null)}
           onUpdate={(updated) => {
             Swal.fire(
               "Updated!",
@@ -104,7 +113,7 @@ const ManageScholarshipModerator = () => {
               "success"
             );
             refetch();
-            setSelectedScholarship(null);
+            setEditScholarship(null);
           }}
         />
       )}

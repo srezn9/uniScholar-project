@@ -12,14 +12,28 @@ const EditScholarshipModal = ({ scholarship, onClose, onUpdate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Optional: pick only the fields you allow to update
+    const updatedFields = {
+      scholarshipName: formData.scholarshipName,
+      universityName: formData.universityName,
+      scholarshipCategory: formData.scholarshipCategory,
+      degree: formData.degree,
+      applicationFees: Number(formData.applicationFees),
+    };
+    // console.log("Sending update to backend:", updatedFields);
+
     try {
       const res = await axios.patch(
-        `/scholarships/${scholarship._id}`,
-        formData
+        `http://localhost:5000/scholarships/${scholarship._id}`,
+        updatedFields
       );
-      onUpdate({ ...formData, _id: scholarship._id });
-      onClose();
-    } catch (err) {
+      if (res.data.modifiedCount > 0 || res.status === 200) {
+        Swal.fire("Success!", "Scholarship updated successfully.", "success");
+        onUpdate({ ...formData, _id: scholarship._id });
+        onClose();
+      }
+    } catch {
       Swal.fire("Error!", "Update failed!", "error");
     }
   };

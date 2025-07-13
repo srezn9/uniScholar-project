@@ -6,7 +6,7 @@ import axios from "axios";
 const AddScholarshipModerator = () => {
   const { register, handleSubmit, reset } = useForm();
 
-  const imageHostKey = "b40fd12cc5454ceef140d62cd1ade341"; // Replace with your actual imgbb API key
+  const imageHostKey = import.meta.env.VITE_IMAGE_UPLOAD_KEY; // Replace with your actual imgbb API key
 
   const onSubmit = async (data) => {
     const image = data.universityImage[0];
@@ -20,21 +20,22 @@ const AddScholarshipModerator = () => {
       );
 
       const imageUrl = imgRes.data.data.display_url;
+      console.log(imageUrl);
 
       const scholarshipData = {
         scholarshipName: data.scholarshipName,
         universityName: data.universityName,
-        universityImage: imageUrl,
+        universityLogo: imageUrl,
         country: data.country,
         city: data.city,
         worldRank: data.worldRank,
-        subjectCategory: data.subjectCategory,
+        subjectName: data.subjectCategory,
         scholarshipCategory: data.scholarshipCategory,
         degree: data.degree,
         tuitionFees: data.tuitionFees || null,
         applicationFees: parseFloat(data.applicationFees),
         serviceCharge: parseFloat(data.serviceCharge),
-        deadline: data.deadline,
+        applicationDeadline: data.deadline,
         postDate: new Date().toISOString().split("T")[0],
         postedBy: data.postedBy,
       };
