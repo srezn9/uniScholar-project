@@ -5,7 +5,7 @@ const MyProfile = () => {
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6 mt-6">
-      <h2 className="text-2xl font-bold mb-4 text-primary">My Profile</h2>
+      <h2 className="text-2xl font-bold mb-4 text-primary text-center">My Profile</h2>
       <div className="flex flex-col items-center space-y-4">
         <img
           src={user?.photoURL || "https://via.placeholder.com/100"}

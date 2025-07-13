@@ -22,7 +22,7 @@ const TopScholarships = () => {
   if (isLoading) return <Loader></Loader>;
 
   return (
-    <div className="my-12 px-4">
+    <div className="my-30 px-4">
       <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-10">
         🎓 Top Scholarships
       </h2>

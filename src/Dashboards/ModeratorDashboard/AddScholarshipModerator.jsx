@@ -2,9 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 const AddScholarshipModerator = () => {
   const { register, handleSubmit, reset } = useForm();
+   const navigate = useNavigate(); // initialize
 
   const imageHostKey = import.meta.env.VITE_IMAGE_UPLOAD_KEY; // Replace with your actual imgbb API key
 
@@ -45,6 +47,7 @@ const AddScholarshipModerator = () => {
       if (res.data.insertedId || res.data.acknowledged) {
         Swal.fire("Success!", "Scholarship added successfully", "success");
         reset();
+         navigate("/allScholarship");
       }
     } catch {
       Swal.fire("Error", "Failed to upload image or submit form", "error");

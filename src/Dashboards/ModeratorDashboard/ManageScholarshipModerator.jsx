@@ -6,13 +6,13 @@ import Swal from "sweetalert2";
 import EditScholarshipModal from "./EditScholarshipModal";
 import ScholarshipDetailsModal from "./ScholarshipDetailsModal";
 
+// Fetch all scholarships from backend
 const fetchScholarships = async () => {
   const res = await axios.get("http://localhost:5000/scholarships");
   return res.data;
 };
 
 const ManageScholarshipModerator = () => {
-  const [selectedScholarship, setSelectedScholarship] = useState(null);
   const [editScholarship, setEditScholarship] = useState(null);
   const [detailScholarship, setDetailScholarship] = useState(null);
 
@@ -25,6 +25,7 @@ const ManageScholarshipModerator = () => {
     queryFn: fetchScholarships,
   });
 
+  // Delete scholarship
   const handleDelete = async (id) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
@@ -82,7 +83,6 @@ const ManageScholarshipModerator = () => {
                   <button onClick={() => setEditScholarship(sch)} title="Edit">
                     <FaEdit className="text-green-600" />
                   </button>
-
                   <button onClick={() => handleDelete(sch._id)} title="Delete">
                     <FaTrash className="text-red-600" />
                   </button>
@@ -106,7 +106,7 @@ const ManageScholarshipModerator = () => {
         <EditScholarshipModal
           scholarship={editScholarship}
           onClose={() => setEditScholarship(null)}
-          onUpdate={(updated) => {
+          onUpdate={() => {
             Swal.fire(
               "Updated!",
               "Scholarship updated successfully!",

@@ -12,18 +12,15 @@ const Checkout = () => {
   const { id } = useParams();
   const stripe = useStripe();
   const elements = useElements();
-  const [paid, setPaid] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
+  const [formData, setFormData] = useState(null);
+  const [showPayment, setShowPayment] = useState(false);
+  const [paid, setPaid] = useState(false);
   const { user } = useAuth();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    // formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
-  // Load scholarship (GET)
+  // Load scholarship
   const {
     data: scholarship,
     isLoading,
@@ -37,7 +34,7 @@ const Checkout = () => {
     enabled: !!id,
   });
 
-  // Create Stripe payment intent (POST)
+  // Create Stripe Payment Intent
   useEffect(() => {
     if (scholarship?.applicationFees) {
       axios
@@ -51,24 +48,23 @@ const Checkout = () => {
     }
   }, [scholarship]);
 
-  if (isLoading) {
+  if (isLoading) return <Loader />;
+  if (isError)
     return (
-      <Loader></Loader>
-    );
-  }
-
-  if (isError) {
-    return (
-      <div className="text-center py-10 text-red-500 font-semibold">
-        Failed to load scholarship data.
+      <div className="text-center text-red-500 py-6">
+        Failed to load scholarship.
       </div>
     );
-  }
 
-  // Stripe Payment
+  // Step 1: Handle Form Submit
+  const onSubmit = (data) => {
+    setFormData(data);
+    setShowPayment(true);
+  };
+
+  // Step 2: Handle Stripe Payment
   const handleStripePayment = async (e) => {
     e.preventDefault();
-
     if (!stripe || !elements) return;
 
     const card = elements.getElement(CardElement);
@@ -93,44 +89,38 @@ const Checkout = () => {
     }
 
     if (paymentIntent.status === "succeeded") {
-      Swal.fire(
-        "Payment Successful",
-        "Your payment was processed successfully!",
-        "success"
-      );
-      setPaid(true);
-    }
-  };
+      // Step 3: Submit to backend
+      const application = {
+        ...formData,
+        universityName: scholarship.universityName,
+        scholarshipCategory: scholarship.scholarshipCategory,
+        subjectName: scholarship.subjectName,
+        userName: user?.name,
+        userEmail: user?.email,
+        userId: user?._id,
+        scholarshipId: scholarship?._id,
+        appliedAt: new Date().toISOString(),
+      };
 
-  // Form Submit with React Hook Form
-  const onSubmit = async (data) => {
-    const application = {
-      ...data,
-      universityName: scholarship.universityName,
-      scholarshipCategory: scholarship.scholarshipCategory,
-      subjectName: scholarship.subjectName,
-      userName: user?.name,
-      userEmail: user?.email,
-      userId: user?._id,
-      scholarshipId: scholarship?._id,
-      appliedAt: new Date().toISOString(),
-    };
-
-    try {
-      const res = await axios.post(
-        "http://localhost:5000/applied-scholarships",
-        application
-      );
-      if (res.data.insertedId) {
-        Swal.fire("Success", "Application submitted successfully!", "success");
-        reset();
+      try {
+        const res = await axios.post(
+          "http://localhost:5000/applied-scholarships",
+          application
+        );
+        if (res.data.insertedId) {
+          Swal.fire(
+            "Success",
+            "Application submitted successfully!",
+            "success"
+          );
+          setPaid(true);
+          reset();
+          setFormData(null);
+          setShowPayment(false);
+        }
+      } catch {
+        Swal.fire("Submission Failed", "Try again later.", "error");
       }
-    } catch {
-      Swal.fire(
-        "Submission Failed",
-        "Failed to submit application. Please try again.",
-        "error"
-      );
     }
   };
 
@@ -140,25 +130,8 @@ const Checkout = () => {
         Apply for {scholarship?.universityName}
       </h2>
 
-      {/* Stripe Card Payment */}
-      {!paid && (
-        <form
-          onSubmit={handleStripePayment}
-          className="space-y-4 p-4 border rounded"
-        >
-          <CardElement className="p-2 border rounded" />
-          <button
-            type="submit"
-            disabled={!stripe || !clientSecret}
-            className="btn btn-primary w-full"
-          >
-            Pay ${scholarship?.applicationFees}
-          </button>
-        </form>
-      )}
-
-      {/* React Hook Form */}
-      {paid && (
+      {/* STEP 1: Application Form */}
+      {!showPayment && !paid && (
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="space-y-4 border p-4 rounded"
@@ -239,9 +212,34 @@ const Checkout = () => {
           />
 
           <button type="submit" className="btn btn-secondary w-full">
-            Submit Application
+            Continue to Payment
           </button>
         </form>
+      )}
+
+      {/* STEP 2: Payment Section */}
+      {showPayment && !paid && (
+        <form
+          onSubmit={handleStripePayment}
+          className="space-y-4 p-4 border rounded"
+        >
+          <h3 className="text-xl font-semibold">Payment</h3>
+          <CardElement className="p-2 border rounded" />
+          <button
+            type="submit"
+            disabled={!stripe || !clientSecret}
+            className="btn btn-primary w-full"
+          >
+            Pay ${scholarship?.applicationFees}
+          </button>
+        </form>
+      )}
+
+      {/* STEP 3: Success Message */}
+      {paid && (
+        <div className="text-green-600 font-bold text-center">
+          ✅ Application submitted & payment successful!
+        </div>
       )}
     </div>
   );
