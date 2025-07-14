@@ -37,6 +37,7 @@ import ManageUsersAdmin from "./Dashboards/AdminDashboard/ManageUsersAdmin.jsx";
 import ManageReviewsAdmin from "./Dashboards/AdminDashboard/ManageReviewsAdmin.jsx";
 import AdminRoute from "./Dashboards/AdminDashboard/AdminRoute/AdminRoute.jsx";
 import AdminDashboard from "./Dashboards/AdminDashboard/AdminDashboard.jsx";
+import AnalyticsCharts from "./Dashboards/AdminDashboard/AnalyticCharts.jsx";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -148,10 +149,20 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <AdminProfile /> },
       { path: "add-scholarship-admin", element: <AddScholarshipAdmin /> },
-      { path: "manage-scholarships-admin", element: <ManageScholarshipsAdmin /> },
-      { path: "manage-applications-admin", element: <ManageApplicationsAdmin /> },
+      {
+        path: "manage-scholarships-admin",
+        element: <ManageScholarshipsAdmin />,
+      },
+      {
+        path: "manage-applications-admin",
+        element: <ManageApplicationsAdmin />,
+      },
       { path: "manage-users-admin", element: <ManageUsersAdmin /> },
       { path: "manage-reviews-admin", element: <ManageReviewsAdmin /> },
+      {
+        path: "/adminDashboard/analytics",
+        element: <AnalyticsCharts />,
+      },
     ],
   },
 ]);

@@ -4,16 +4,11 @@ import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../shared/Loader";
 
-// Fetch function (no useState here)
-const fetchAllApplications = async () => {
-  const res = await axios.get("https://unischolar-server.vercel.app/applied-scholarships/all");
-  return res.data;
-};
-
 const AllApplicationModerator = () => {
   const [selectedApp, setSelectedApp] = useState(null);
   const [feedbackApp, setFeedbackApp] = useState(null);
   const [feedbackText, setFeedbackText] = useState("");
+  const [sortOption, setSortOption] = useState("");
 
   const {
     data: applications = [],
@@ -21,8 +16,28 @@ const AllApplicationModerator = () => {
     isError,
     refetch,
   } = useQuery({
-    queryKey: ["allApplications"],
-    queryFn: fetchAllApplications,
+    queryKey: ["allApplications", sortOption],
+    queryFn: async () => {
+      if (!sortOption) {
+        // Default sorting params
+        return axios
+          .get(
+            "https://unischolar-server.vercel.app/applied-scholarships/all",
+            {
+              params: { sortBy: "appliedAt", order: "desc" },
+            }
+          )
+          .then((res) => res.data);
+      }
+
+      const [sortBy, order] = sortOption.split("_");
+
+      return axios
+        .get("https://unischolar-server.vercel.app/applied-scholarships/all", {
+          params: { sortBy, order },
+        })
+        .then((res) => res.data);
+    },
   });
 
   // Handle feedback submit
@@ -58,10 +73,16 @@ const AllApplicationModerator = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`https://unischolar-server.vercel.app/applied-scholarships/${id}`)
+          .delete(
+            `https://unischolar-server.vercel.app/applied-scholarships/${id}`
+          )
           .then(() => {
             refetch();
-            Swal.fire("Canceled!", "The application has been canceled.", "success");
+            Swal.fire(
+              "Canceled!",
+              "The application has been canceled.",
+              "success"
+            );
           });
       }
     });
@@ -75,6 +96,18 @@ const AllApplicationModerator = () => {
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-6">All Applied Scholarships</h2>
       <div className="overflow-x-auto">
+        <div className="flex justify-center mb-6">
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+            className="select select-bordered w-full max-w-xs"
+          >
+            <option value="">Sort By</option>
+            <option value="appliedAt_asc">Applied Date (Oldest First)</option>
+            <option value="appliedAt_desc">Applied Date (Newest First)</option>
+          </select>
+        </div>
+
         <table className="table w-full border">
           <thead>
             <tr className="bg-gray-100 text-left">
@@ -138,19 +171,47 @@ const AllApplicationModerator = () => {
           <div className="bg-white rounded-lg p-6 w-[90%] md:w-[500px] max-h-[90vh] overflow-y-auto">
             <h3 className="text-xl font-bold mb-4">Application Details</h3>
             <div className="space-y-2 text-sm">
-              <p><strong>Email:</strong> {selectedApp.userEmail}</p>
-              <p><strong>Phone:</strong> {selectedApp.phone}</p>
-              <p><strong>Gender:</strong> {selectedApp.gender}</p>
-              <p><strong>Address:</strong> {selectedApp.address}</p>
-              <p><strong>University:</strong> {selectedApp.universityName}</p>
-              <p><strong>Degree:</strong> {selectedApp.degree}</p>
-              <p><strong>Scholarship Category:</strong> {selectedApp.scholarshipCategory}</p>
-              <p><strong>Subject:</strong> {selectedApp.subjectName}</p>
-              <p><strong>SSC Result:</strong> {selectedApp.sscResult}</p>
-              <p><strong>HSC Result:</strong> {selectedApp.hscResult}</p>
-              <p><strong>Study Gap:</strong> {selectedApp.studyGap}</p>
-              <p><strong>Status:</strong> {selectedApp.status}</p>
-              <p><strong>Applied At:</strong> {new Date(selectedApp.appliedAt).toLocaleString()}</p>
+              <p>
+                <strong>Email:</strong> {selectedApp.userEmail}
+              </p>
+              <p>
+                <strong>Phone:</strong> {selectedApp.phone}
+              </p>
+              <p>
+                <strong>Gender:</strong> {selectedApp.gender}
+              </p>
+              <p>
+                <strong>Address:</strong> {selectedApp.address}
+              </p>
+              <p>
+                <strong>University:</strong> {selectedApp.universityName}
+              </p>
+              <p>
+                <strong>Degree:</strong> {selectedApp.degree}
+              </p>
+              <p>
+                <strong>Scholarship Category:</strong>{" "}
+                {selectedApp.scholarshipCategory}
+              </p>
+              <p>
+                <strong>Subject:</strong> {selectedApp.subjectName}
+              </p>
+              <p>
+                <strong>SSC Result:</strong> {selectedApp.sscResult}
+              </p>
+              <p>
+                <strong>HSC Result:</strong> {selectedApp.hscResult}
+              </p>
+              <p>
+                <strong>Study Gap:</strong> {selectedApp.studyGap}
+              </p>
+              <p>
+                <strong>Status:</strong> {selectedApp.status}
+              </p>
+              <p>
+                <strong>Applied At:</strong>{" "}
+                {new Date(selectedApp.appliedAt).toLocaleString()}
+              </p>
             </div>
             <div className="mt-4 flex justify-end">
               <button
@@ -170,7 +231,8 @@ const AllApplicationModerator = () => {
           <div className="bg-white rounded-lg p-6 w-[90%] md:w-[500px]">
             <h3 className="text-xl font-bold mb-4">Submit Feedback</h3>
             <p className="mb-2">
-              <strong>For:</strong> {feedbackApp.userName} ({feedbackApp.userEmail})
+              <strong>For:</strong> {feedbackApp.userName} (
+              {feedbackApp.userEmail})
             </p>
             <textarea
               className="w-full p-2 border rounded mb-4"

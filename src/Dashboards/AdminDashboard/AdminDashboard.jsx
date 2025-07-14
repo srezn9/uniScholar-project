@@ -81,6 +81,16 @@ const AdminDashboard = () => {
             >
               Manage Reviews
             </NavLink>
+            <NavLink
+              to="/adminDashboard/analytics"
+              className={({ isActive }) =>
+                isActive
+                  ? "bg-white text-primary font-semibold px-4 py-2 rounded-xl shadow"
+                  : "hover:bg-white/20 px-4 py-2 rounded-xl transition-colors"
+              }
+            >
+              Analytics
+            </NavLink>
           </nav>
         </aside>
 
