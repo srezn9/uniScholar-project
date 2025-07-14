@@ -1,24 +1,30 @@
-import React, { useEffect, useState } from "react";
-import useAuth from "../../hooks/useAuth";
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import useAuth from "../../hooks/useAuth";
 import Loader from "../../shared/Loader";
 
 const MyProfileModerator = () => {
   const { user } = useAuth();
-  const [role, setRole] = useState(null);
 
-  useEffect(() => {
-    if (user?.email) {
-      axios
-        .get(`https://unischolar-server.vercel.app/users/role/${user.email}`)
-        .then((res) => setRole(res.data.role))
-        .catch(() => setRole("user")); // fallback
-    }
-  }, [user]);
+  const {
+    data: role,
+    isLoading,
+    isError,
+  } = useQuery({
+    enabled: !!user?.email,
+    queryKey: ["role", user?.email],
+    queryFn: async () => {
+      const res = await axios.get(
+        `https://unischolar-server.vercel.app/users/role/${user.email}`
+      );
+      return res.data.role || "user";
+    },
+  });
 
-  if (!user) {
-    return <Loader></Loader>;
-  }
+  if (!user || isLoading) return <Loader />;
+  if (isError)
+    return <p className="text-red-500 text-center">Failed to load role.</p>;
 
   return (
     <div className="max-w-md mx-auto mt-12 bg-white shadow-xl rounded-xl p-6 text-center">
@@ -32,8 +38,7 @@ const MyProfileModerator = () => {
       </h2>
       <p className="text-gray-600">{user.email}</p>
 
-      {/* Show role if not 'user' */}
-      {role && role !== "user" && (
+      {role !== "user" && (
         <p className="mt-2 inline-block bg-secondary text-white text-sm font-medium px-4 py-1 rounded-full">
           {role.toUpperCase()}
         </p>
