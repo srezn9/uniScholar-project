@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router"; // ✅ Fix your import (should be 'react-router-dom', not 'react-router')
+import { Link, useNavigate } from "react-router"; 
 import Swal from "sweetalert2";
 import { AuthContext } from "../Contexts/AuthContext";
 
 const Login = () => {
   const { login, googleLogin, user, userRole } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [redirectPending, setRedirectPending] = useState(false); // to wait for role
+  const [redirectPending, setRedirectPending] = useState(false); 
 
   const getFriendlyErrorMessage = (error) => {
     if (!error?.code) return "Something went wrong. Please try again.";
@@ -29,7 +29,7 @@ const Login = () => {
     }
   };
 
-  // ✅ Redirect when both user & role are available
+  
   useEffect(() => {
     if (redirectPending && user && userRole) {
       let target = "/userDashboard";
@@ -62,7 +62,7 @@ const Login = () => {
           },
           timer: 2000,
         });
-        setRedirectPending(true); // ✅ wait for role before navigating
+        setRedirectPending(true); 
       })
       .catch((error) => {
         Swal.fire({
@@ -100,7 +100,7 @@ const Login = () => {
           },
           timer: 2000,
         });
-        setRedirectPending(true); // ✅ wait for role before navigating
+        setRedirectPending(true);
       })
       .catch((error) => {
         Swal.fire({

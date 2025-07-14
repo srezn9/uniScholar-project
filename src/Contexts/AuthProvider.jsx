@@ -9,7 +9,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 
-import axios from "axios"; // Make sure axios is installed
+import axios from "axios"; 
 import { AuthContext } from "./AuthContext";
 import { auth } from "../firebase.init";
 
@@ -17,7 +17,7 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [userRole, setUserRole] = useState(null); // NEW
+  const [userRole, setUserRole] = useState(null); 
   const [loading, setLoading] = useState(true);
 
   const register = (email, password) => {
@@ -72,7 +72,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     user,
-    userRole, // expose role
+    userRole,
     loading,
     register,
     login,

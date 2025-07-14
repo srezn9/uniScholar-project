@@ -19,7 +19,7 @@ const AllApplicationModerator = () => {
     queryKey: ["allApplications", sortOption],
     queryFn: async () => {
       if (!sortOption) {
-        // Default sorting params
+      
         return axios
           .get(
             "https://unischolar-server.vercel.app/applied-scholarships/all",
@@ -40,7 +40,7 @@ const AllApplicationModerator = () => {
     },
   });
 
-  // Handle feedback submit
+  
   const handleFeedbackSubmit = async () => {
     if (!feedbackText.trim()) return;
 
@@ -62,7 +62,7 @@ const AllApplicationModerator = () => {
     }
   };
 
-  // Cancel application
+  
   const handleCancel = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -165,7 +165,7 @@ const AllApplicationModerator = () => {
         </table>
       </div>
 
-      {/* Details Modal */}
+      
       {selectedApp && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
           <div className="bg-white rounded-lg p-6 w-[90%] md:w-[500px] max-h-[90vh] overflow-y-auto">

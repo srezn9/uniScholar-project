@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router"; // Make sure to use this instead of 'react-router'
+import { Link } from "react-router";
 
 const Logo = () => {
   return (

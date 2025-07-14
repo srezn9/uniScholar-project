@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router"; // ✅ Fixed import
+import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { AuthContext } from "../Contexts/AuthContext";
@@ -11,7 +11,7 @@ const Register = () => {
 
   const navigate = useNavigate();
   const [accepted, setAccepted] = useState(false);
-  const [redirectPending, setRedirectPending] = useState(false); // ✅ new state
+  const [redirectPending, setRedirectPending] = useState(false); 
 
   const showToast = (icon, title) => {
     Swal.fire({
@@ -73,11 +73,11 @@ const Register = () => {
       await axios.post("https://unischolar-server.vercel.app/users", {
         name,
         email,
-        role: "user", // default role
+        role: "user",
       });
 
       showToast("success", "You have successfully registered to UniScholar");
-      setRedirectPending(true); // ✅ wait for role then redirect
+      setRedirectPending(true); 
     } catch (error) {
       console.error("Registration error:", error);
       showToast("error", getErrorMessage(error));
@@ -89,7 +89,7 @@ const Register = () => {
       const result = await googleLogin();
       const userInfo = result.user;
 
-      // Save user to DB
+     
       await axios.post("https://unischolar-server.vercel.app/users", {
         name: userInfo.displayName,
         email: userInfo.email,
@@ -97,14 +97,14 @@ const Register = () => {
       });
 
       showToast("success", "You have successfully logged in with Google!");
-      setRedirectPending(true); // ✅ wait for role then redirect
+      setRedirectPending(true); 
     } catch (error) {
       console.error("Google login error:", error);
       showToast("error", getErrorMessage(error));
     }
   };
 
-  // ✅ Redirect based on role
+  
   useEffect(() => {
     if (redirectPending && user && userRole) {
       let target = "/userDashboard";

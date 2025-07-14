@@ -19,14 +19,14 @@ const AddScholarshipAdmin = () => {
     formData.append("image", imageFile);
 
     try {
-      // Upload image to imgbb
+      
       const imgRes = await axios.post(
         `https://api.imgbb.com/1/upload?key=${imageHostKey}`,
         formData
       );
       const imageUrl = imgRes.data.data.display_url;
 
-      // Build scholarship object
+      
       const scholarshipData = {
         scholarshipName: data.scholarshipName,
         universityName: data.universityName,
@@ -45,7 +45,7 @@ const AddScholarshipAdmin = () => {
         postedBy: user?.email || data.postedBy,
       };
 
-      // Submit to DB
+      
       const res = await axios.post(
         "https://unischolar-server.vercel.app/scholarships",
         scholarshipData

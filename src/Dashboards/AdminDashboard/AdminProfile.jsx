@@ -7,7 +7,7 @@ import Loader from "../../shared/Loader";
 const AdminProfile = () => {
   const { user } = useAuth();
 
-  // Fetch role using TanStack Query
+  
   const {
     data: role,
     isLoading,

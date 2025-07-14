@@ -15,7 +15,7 @@ const AdminRoute = ({ children }) => {
     queryKey: ["role", user?.email],
     queryFn: async () => {
       const res = await axios.get(`https://unischolar-server.vercel.app/users/role/${user.email}`);
-      return res.data?.role || "user"; // fallback to "user" if no role found
+      return res.data?.role || "user";
     },
   });
 

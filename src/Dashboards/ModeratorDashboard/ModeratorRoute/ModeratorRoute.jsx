@@ -13,7 +13,7 @@ const ModeratorRoute = ({ children }) => {
     queryKey: ["role", user?.email],
     queryFn: async () => {
       const res = await axios.get(`/users/role/${user.email}`);
-      return res.data?.role || "moderator"; // Ensure it returns a value
+      return res.data?.role || "moderator"; 
     },
   });
 

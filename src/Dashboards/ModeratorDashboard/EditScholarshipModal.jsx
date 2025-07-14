@@ -13,7 +13,7 @@ const EditScholarshipModal = ({ scholarship, onClose, onUpdate }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Optional: pick only the fields you allow to update
+    
     const updatedFields = {
       scholarshipName: formData.scholarshipName,
       universityName: formData.universityName,
@@ -21,7 +21,7 @@ const EditScholarshipModal = ({ scholarship, onClose, onUpdate }) => {
       degree: formData.degree,
       applicationFees: Number(formData.applicationFees),
     };
-    // console.log("Sending update to backend:", updatedFields);
+   
 
     try {
       const res = await axios.patch(

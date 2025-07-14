@@ -5,10 +5,8 @@ import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import ScholarshipDetailsModalAdmin from "./ScholarshipDetailsModalAdmin";
 import EditScholarshipModalAdmin from "./EditScholarshipModalAdmin";
-// import EditScholarshipModal from "./EditScholarshipModal";
-// import ScholarshipDetailsModal from "./ScholarshipDetailsModal";
+import Loader from "../../shared/Loader";
 
-// Fetch all scholarships
 const fetchScholarships = async () => {
   const res = await axios.get(
     "https://unischolar-server.vercel.app/scholarships"
@@ -29,7 +27,6 @@ const ManageScholarshipsAdmin = () => {
     queryFn: fetchScholarships,
   });
 
-  // Delete handler
   const handleDelete = async (id) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
@@ -52,45 +49,80 @@ const ManageScholarshipsAdmin = () => {
     }
   };
 
-  if (isLoading) return <p className="p-4">Loading scholarships...</p>;
+  if (isLoading) return <Loader></Loader>;
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-6 text-primary">
+    <div className="p-4 md:p-6 lg:p-8">
+      <h2 className="text-xl md:text-2xl font-bold mb-6 text-primary">
         Manage Scholarships (Admin)
       </h2>
-      <div className="overflow-x-auto">
-        <table className="table w-full border">
-          <thead className="bg-gray-100">
+
+      <div className="overflow-x-auto w-full">
+        <table className="min-w-[700px] w-full border border-gray-300">
+          <thead className="bg-gray-100 sticky top-0 z-10">
             <tr>
-              <th>Scholarship</th>
-              <th>University</th>
-              <th>Category</th>
-              <th>Degree</th>
-              <th>Fees</th>
-              <th>Actions</th>
+              <th className="p-2 md:p-3 text-left text-sm md:text-base">
+                Scholarship
+              </th>
+              <th className="p-2 md:p-3 text-left text-sm md:text-base">
+                University
+              </th>
+              <th className="p-2 md:p-3 text-left text-sm md:text-base">
+                Category
+              </th>
+              <th className="p-2 md:p-3 text-left text-sm md:text-base">
+                Degree
+              </th>
+              <th className="p-2 md:p-3 text-left text-sm md:text-base">
+                Fees
+              </th>
+              <th className="p-2 md:p-3 text-center text-sm md:text-base">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
             {scholarships.map((sch) => (
-              <tr key={sch._id}>
-                <td>{sch.scholarshipName}</td>
-                <td>{sch.universityName}</td>
-                <td>{sch.scholarshipCategory}</td>
-                <td>{sch.degree}</td>
-                <td>${sch.applicationFees}</td>
-                <td className="space-x-2 text-lg">
+              <tr
+                key={sch._id}
+                className="border-t border-gray-200 hover:bg-gray-50 transition-colors duration-150"
+              >
+                <td className="p-2 md:p-3 text-sm md:text-base">
+                  {sch.scholarshipName}
+                </td>
+                <td className="p-2 md:p-3 text-sm md:text-base">
+                  {sch.universityName}
+                </td>
+                <td className="p-2 md:p-3 text-sm md:text-base">
+                  {sch.scholarshipCategory}
+                </td>
+                <td className="p-2 md:p-3 text-sm md:text-base">
+                  {sch.degree}
+                </td>
+                <td className="p-2 md:p-3 text-sm md:text-base">
+                  ${sch.applicationFees}
+                </td>
+                <td className="p-2 md:p-3 text-center text-sm md:text-base space-x-3">
                   <button
                     onClick={() => setDetailScholarship(sch)}
                     title="Details"
+                    className="inline-block hover:text-blue-700"
                   >
-                    <FaEye className="text-blue-600" />
+                    <FaEye className="text-blue-600 w-4 h-4 md:w-5 md:h-5" />
                   </button>
-                  <button onClick={() => setEditScholarship(sch)} title="Edit">
-                    <FaEdit className="text-green-600" />
+                  <button
+                    onClick={() => setEditScholarship(sch)}
+                    title="Edit"
+                    className="inline-block hover:text-green-700"
+                  >
+                    <FaEdit className="text-green-600 w-4 h-4 md:w-5 md:h-5" />
                   </button>
-                  <button onClick={() => handleDelete(sch._id)} title="Delete">
-                    <FaTrash className="text-red-600" />
+                  <button
+                    onClick={() => handleDelete(sch._id)}
+                    title="Delete"
+                    className="inline-block hover:text-red-700"
+                  >
+                    <FaTrash className="text-red-600 w-4 h-4 md:w-5 md:h-5" />
                   </button>
                 </td>
               </tr>
@@ -99,7 +131,6 @@ const ManageScholarshipsAdmin = () => {
         </table>
       </div>
 
-      {/* Details Modal */}
       {detailScholarship && (
         <ScholarshipDetailsModalAdmin
           scholarship={detailScholarship}
@@ -107,7 +138,6 @@ const ManageScholarshipsAdmin = () => {
         />
       )}
 
-      {/* Edit Modal */}
       {editScholarship && (
         <EditScholarshipModalAdmin
           scholarship={editScholarship}

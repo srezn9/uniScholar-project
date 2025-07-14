@@ -114,7 +114,7 @@ const MyApplications = () => {
       scholarshipId: selectedApp.scholarshipId,
       scholarshipName: selectedApp.scholarshipName || "N/A",
       universityName: selectedApp.universityName || "Unknown University",
-      universityId: selectedApp.universityId, // ✅ correct this
+      universityId: selectedApp.universityId, 
       userName: user?.displayName || "Anonymous",
       userEmail: user?.email,
       userImage: user?.photoURL || null,
@@ -243,7 +243,7 @@ const MyApplications = () => {
         </tbody>
       </table>
 
-      {/* Add Review Modal */}
+      
       {selectedApp && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md relative">
@@ -285,7 +285,7 @@ const MyApplications = () => {
                   type="date"
                   {...register("date", { required: true })}
                   className="input input-bordered w-full"
-                  defaultValue={new Date().toISOString().split("T")[0]} // default to today
+                  defaultValue={new Date().toISOString().split("T")[0]}
                 />
                 {errors.date && (
                   <p className="text-red-500 text-sm">Please select a date</p>
@@ -313,7 +313,6 @@ const MyApplications = () => {
         </div>
       )}
 
-      {/* Details Modal */}
       {selectedDetailsApp && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-md relative">

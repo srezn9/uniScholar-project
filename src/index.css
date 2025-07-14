@@ -3,13 +3,12 @@
 @plugin "daisyui";
 
 @plugin "daisyui/theme" {
-  /* name: "dark"; */
+ 
   default: true;
   --color-primary: #2D2A32;
   --color-secondary: 	#B25D5D;
   --color-accent: #A3B18A;
-  /* --color-text1: ##3E3E3E;
-  --color-text2: #78716C */
+  
 }
 
 

@@ -35,7 +35,7 @@ const AnalyticsCharts = () => {
         📊 Admin Analytics
       </h2>
 
-      {/* Users by Role - Pie Chart */}
+      
       <div className="max-w-xl mx-auto">
         <h3 className="text-xl font-semibold mb-2 text-center">
           Users by Role

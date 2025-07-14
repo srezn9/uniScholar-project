@@ -6,9 +6,9 @@ import { useNavigate } from "react-router";
 
 const AddScholarshipModerator = () => {
   const { register, handleSubmit, reset } = useForm();
-   const navigate = useNavigate(); // initialize
+   const navigate = useNavigate(); 
 
-  const imageHostKey = import.meta.env.VITE_IMAGE_UPLOAD_KEY; // Replace with your actual imgbb API key
+  const imageHostKey = import.meta.env.VITE_IMAGE_UPLOAD_KEY; 
 
   const onSubmit = async (data) => {
     const image = data.universityImage[0];

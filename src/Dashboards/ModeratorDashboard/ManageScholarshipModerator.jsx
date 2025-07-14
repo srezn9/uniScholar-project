@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import EditScholarshipModal from "./EditScholarshipModal";
 import ScholarshipDetailsModal from "./ScholarshipDetailsModal";
 
-// Fetch all scholarships from backend
+
 const fetchScholarships = async () => {
   const res = await axios.get("https://unischolar-server.vercel.app/scholarships");
   return res.data;
@@ -25,7 +25,7 @@ const ManageScholarshipModerator = () => {
     queryFn: fetchScholarships,
   });
 
-  // Delete scholarship
+  
   const handleDelete = async (id) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
@@ -93,7 +93,7 @@ const ManageScholarshipModerator = () => {
         </table>
       </div>
 
-      {/* Details Modal */}
+      
       {detailScholarship && (
         <ScholarshipDetailsModal
           scholarship={detailScholarship}
@@ -101,7 +101,7 @@ const ManageScholarshipModerator = () => {
         />
       )}
 
-      {/* Edit Modal */}
+      
       {editScholarship && (
         <EditScholarshipModal
           scholarship={editScholarship}

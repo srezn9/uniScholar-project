@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../../shared/Loader";
 
-// Fetch function
+
 const fetchAllApplications = async () => {
   const res = await axios.get(
     "https://unischolar-server.vercel.app/applied-scholarships/all"
@@ -27,7 +27,7 @@ const ManageApplicationsAdmin = () => {
     queryFn: fetchAllApplications,
   });
 
-  // Handle feedback submit
+  
   const handleFeedbackSubmit = async () => {
     if (!feedbackText.trim()) return;
 
@@ -49,7 +49,7 @@ const ManageApplicationsAdmin = () => {
     }
   };
 
-  // Cancel application
+  
   const handleCancel = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -143,7 +143,7 @@ const ManageApplicationsAdmin = () => {
         </table>
       </div>
 
-      {/* Details Modal */}
+      
       {selectedApp && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
           <div className="bg-white rounded-lg p-6 w-[90%] md:w-[500px] max-h-[90vh] overflow-y-auto">
@@ -203,7 +203,7 @@ const ManageApplicationsAdmin = () => {
         </div>
       )}
 
-      {/* Feedback Modal */}
+      
       {feedbackApp && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
           <div className="bg-white rounded-lg p-6 w-[90%] md:w-[500px]">

@@ -33,7 +33,7 @@ const TopScholarships = () => {
             key={s._id}
             className="bg-white shadow-md border border-gray-200 rounded-tl-3xl rounded-br-3xl overflow-hidden hover:shadow-xl transition duration-300 group"
           >
-            {/* University Image */}
+            
             <div className="relative">
               <img
                 src={s.universityLogo}
@@ -45,7 +45,7 @@ const TopScholarships = () => {
               </div>
             </div>
 
-            {/* Scholarship Info */}
+            
             <div className="p-5 space-y-1">
               <h3 className="text-xl font-bold text-gray-800">{s.universityName}</h3>
               <p className="text-sm text-gray-600">{s.subjectName}</p>
@@ -64,7 +64,7 @@ const TopScholarships = () => {
                 ⭐ {calculateAverageRating(s.reviews)}
               </p>
 
-              {/* Details Button */}
+              
               <Link to={`/scholarships/${s._id}`}>
                 <button className="mt-3 bg-primary text-white px-4 py-1 rounded-md hover:bg-[#3A3640] transition duration-300">
                   View Details
@@ -75,7 +75,7 @@ const TopScholarships = () => {
         ))}
       </div>
 
-      {/* View All Button */}
+      
       <div className="text-center mt-10">
         <button
           onClick={() => navigate("/allScholarship")}

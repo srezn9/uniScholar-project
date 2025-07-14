@@ -35,7 +35,7 @@ const AllReviewsModerator = () => {
           refetch();
         }
       } else if (review.from === "embedded") {
-        const scholarshipId = review._id.split("_")[0]; // extract real ObjectId
+        const scholarshipId = review._id.split("_")[0]; 
         const res = await axios.delete(
           `https://unischolar-server.vercel.app/embedded-reviews/${scholarshipId}`,
           {

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router"; // make sure to use react-router-dom
+import { Link, NavLink } from "react-router"; 
 import { AuthContext } from "../Contexts/AuthContext";
 import Swal from "sweetalert2";
 
@@ -115,7 +115,7 @@ const Navbar = () => {
         </li>
       )}
 
-      {/* FAQ link with anchor for scroll */}
+      {/* anchor for scroll */}
       <li>
         <a
           href="#faq"
