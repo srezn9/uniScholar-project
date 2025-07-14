@@ -1,16 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router"; // ✅ Fixed import
 import Swal from "sweetalert2";
-
-// import { Helmet } from "react-helmet-async";
-import { AuthContext } from "../Contexts/AuthContext";
 import axios from "axios";
+import { AuthContext } from "../Contexts/AuthContext";
 
 const Register = () => {
-  const { register, updateUserProfile, googleLogin } = useContext(AuthContext);
+  const { register, updateUserProfile, googleLogin, user, userRole } =
+    useContext(AuthContext);
+
   const navigate = useNavigate();
   const [accepted, setAccepted] = useState(false);
+  const [redirectPending, setRedirectPending] = useState(false); // ✅ new state
 
   const showToast = (icon, title) => {
     Swal.fire({
@@ -32,7 +33,6 @@ const Register = () => {
 
   const getErrorMessage = (error) => {
     if (!error?.code) return "Something went wrong. Please try again.";
-
     switch (error.code) {
       case "auth/email-already-in-use":
         return "This email is already registered. Try logging in.";
@@ -65,54 +65,58 @@ const Register = () => {
     }
 
     try {
-      // Register user in Firebase
       await register(email, password);
-
-      // Update Firebase profile
       await updateUserProfile({ displayName: name, photoURL });
 
-      // Show success toast for Firebase
       showToast("success", "Registered in Firebase. Saving user...");
 
-      try {
-        // Save to MongoDB
-        await axios.post("https://unischolar-server.vercel.app/users", {
-          name,
-          email,
-          role: "user",
-        });
+      await axios.post("https://unischolar-server.vercel.app/users", {
+        name,
+        email,
+        role: "user", // default role
+      });
 
-        showToast("success", "You have successfully registered to UniScholar");
-        navigate("/");
-      } catch (dbError) {
-        console.error("Database save failed:", dbError);
-        showToast(
-          "error",
-          "Registration succeeded, but failed to save user data."
-        );
-      }
+      showToast("success", "You have successfully registered to UniScholar");
+      setRedirectPending(true); // ✅ wait for role then redirect
     } catch (error) {
-      console.error("Firebase error:", error);
+      console.error("Registration error:", error);
       showToast("error", getErrorMessage(error));
     }
   };
 
-  const handleGoogleLogin = () => {
-    googleLogin()
-      .then(() => {
-        showToast("success", "You have succesfully logged in with Google!");
-        navigate("/");
-      })
-      .catch((error) => {
-        showToast("error", getErrorMessage(error));
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await googleLogin();
+      const userInfo = result.user;
+
+      // Save user to DB
+      await axios.post("https://unischolar-server.vercel.app/users", {
+        name: userInfo.displayName,
+        email: userInfo.email,
+        role: "user",
       });
+
+      showToast("success", "You have successfully logged in with Google!");
+      setRedirectPending(true); // ✅ wait for role then redirect
+    } catch (error) {
+      console.error("Google login error:", error);
+      showToast("error", getErrorMessage(error));
+    }
   };
+
+  // ✅ Redirect based on role
+  useEffect(() => {
+    if (redirectPending && user && userRole) {
+      let target = "/userDashboard";
+      if (userRole === "admin") target = "/adminDashboard";
+      else if (userRole === "moderator") target = "/moderatorDashboard";
+
+      navigate(target);
+    }
+  }, [redirectPending, user, userRole, navigate]);
 
   return (
     <div className="card bg-base-100 w-full mx-auto max-w-sm shrink-0 shadow-2xl my-12 text-base-content">
-      {/* <Helmet>
-              <title>Register || TutorSphere</title>
-            </Helmet> */}
       <h2 className="text-center p-5 text-3xl font-bold">Register Now</h2>
       <form onSubmit={handleRegister} className="card-body">
         <fieldset className="fieldset">

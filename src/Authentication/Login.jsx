@@ -1,18 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router"; // ✅ Fix your import (should be 'react-router-dom', not 'react-router')
 import Swal from "sweetalert2";
 import { AuthContext } from "../Contexts/AuthContext";
 
-// import { Helmet } from "react-helmet-async";
-
 const Login = () => {
-  const { login, googleLogin } = useContext(AuthContext);
+  const { login, googleLogin, user, userRole } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [redirectPending, setRedirectPending] = useState(false); // to wait for role
 
   const getFriendlyErrorMessage = (error) => {
     if (!error?.code) return "Something went wrong. Please try again.";
-
     switch (error.code) {
       case "auth/user-not-found":
         return "No user found with this email.";
@@ -30,6 +28,17 @@ const Login = () => {
         return "Login failed. Please check your credentials.";
     }
   };
+
+  // ✅ Redirect when both user & role are available
+  useEffect(() => {
+    if (redirectPending && user && userRole) {
+      let target = "/userDashboard";
+      if (userRole === "admin") target = "/adminDashboard";
+      else if (userRole === "moderator") target = "/moderatorDashboard";
+
+      navigate(target);
+    }
+  }, [user, userRole, redirectPending, navigate]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -51,9 +60,9 @@ const Login = () => {
             popup: "rounded-xl shadow-lg",
             confirmButton: "px-4 py-2 text-white font-semibold",
           },
-          timer: 3000,
+          timer: 2000,
         });
-        navigate("/");
+        setRedirectPending(true); // ✅ wait for role before navigating
       })
       .catch((error) => {
         Swal.fire({
@@ -89,9 +98,9 @@ const Login = () => {
             popup: "rounded-xl shadow-lg",
             confirmButton: "px-4 py-2 text-white font-semibold",
           },
-          timer: 3000,
+          timer: 2000,
         });
-        navigate("/");
+        setRedirectPending(true); // ✅ wait for role before navigating
       })
       .catch((error) => {
         Swal.fire({
@@ -113,12 +122,7 @@ const Login = () => {
 
   return (
     <div className="card bg-base-100 w-full mx-auto max-w-sm shrink-0 shadow-2xl my-12 text-base-content">
-      {/* <Helmet>
-              <title>Login || TutorSphere</title>
-            </Helmet> */}
-      <h2 className="text-center p-5 text-3xl font-bold">
-        Login Now
-      </h2>
+      <h2 className="text-center p-5 text-3xl font-bold">Login Now</h2>
 
       <form onSubmit={handleLogin} className="card-body">
         <fieldset className="fieldset">

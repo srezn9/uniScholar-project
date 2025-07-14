@@ -1,24 +1,10 @@
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink } from "react-router"; // make sure to use react-router-dom
 import { AuthContext } from "../Contexts/AuthContext";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const { user, logout } = useContext(AuthContext);
-
-  // Theme state
-  //   const [theme, setTheme] = useState(() => {
-  //     return localStorage.getItem("theme") || "light";
-  //   });
-
-  //   useEffect(() => {
-  //     document.documentElement.setAttribute("data-theme", theme);
-  //     localStorage.setItem("theme", theme);
-  //   }, [theme]);
-
-  //   const toggleTheme = () => {
-  //     setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  //   };
+  const { user, logout, userRole } = useContext(AuthContext);
 
   const handleLogout = () => {
     logout()
@@ -83,42 +69,60 @@ const Navbar = () => {
           All Scholarships
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/userDashboard"
-          className={({ isActive }) =>
-            isActive
-              ? "underline text-secondary font-semibold"
-              : "font-semibold"
-          }
-        >
-          User Dashboard
-        </NavLink>
-      </li>
 
+      {user && (
+        <li>
+          <NavLink
+            to="/userDashboard"
+            className={({ isActive }) =>
+              isActive
+                ? "underline text-secondary font-semibold"
+                : "font-semibold"
+            }
+          >
+            User Dashboard
+          </NavLink>
+        </li>
+      )}
+
+      {(userRole === "moderator" || userRole === "admin") && (
+        <li>
+          <NavLink
+            to="/moderatorDashboard"
+            className={({ isActive }) =>
+              isActive
+                ? "underline text-secondary font-semibold"
+                : "font-semibold"
+            }
+          >
+            Moderator Dashboard
+          </NavLink>
+        </li>
+      )}
+
+      {userRole === "admin" && (
+        <li>
+          <NavLink
+            to="/adminDashboard"
+            className={({ isActive }) =>
+              isActive
+                ? "underline text-secondary font-semibold"
+                : "font-semibold"
+            }
+          >
+            Admin Dashboard
+          </NavLink>
+        </li>
+      )}
+
+      {/* FAQ link with anchor for scroll */}
       <li>
-        <NavLink
-          to="/moderatorDashboard"
-          className={({ isActive }) =>
-            isActive
-              ? "underline text-secondary font-semibold"
-              : "font-semibold"
-          }
+        <a
+          href="#faq"
+          className="font-semibold hover:underline text-secondary cursor-pointer"
         >
-          Moderator Dashboard
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/adminDashboard"
-          className={({ isActive }) =>
-            isActive
-              ? "underline text-secondary font-semibold"
-              : "font-semibold"
-          }
-        >
-          Admin Dashboard
-        </NavLink>
+          FAQ
+        </a>
       </li>
     </>
   );
@@ -145,7 +149,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow"
           >
             {links}
             {!user && (
@@ -169,21 +173,12 @@ const Navbar = () => {
           <span className="text-secondary">Scholar</span>
         </h2>
       </div>
+
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
 
       <div className="navbar-end hidden lg:flex items-center gap-4">
-        {/* Theme toggle button */}
-        {/* <button
-          onClick={toggleTheme}
-          className="btn btn-sm btn-outline"
-          title="Toggle Dark/Light Theme"
-          aria-label="Toggle Dark/Light Theme"
-        >
-          {theme === "light" ? "🌞 Light" : "🌙 Dark"}
-        </button> */}
-
         {user ? (
           <div className="dropdown dropdown-end">
             <div

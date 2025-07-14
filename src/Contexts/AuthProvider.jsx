@@ -9,14 +9,15 @@ import {
   updateProfile,
 } from "firebase/auth";
 
+import axios from "axios"; // Make sure axios is installed
 import { AuthContext } from "./AuthContext";
 import { auth } from "../firebase.init";
-
 
 const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userRole, setUserRole] = useState(null); // NEW
   const [loading, setLoading] = useState(true);
 
   const register = (email, password) => {
@@ -39,25 +40,27 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  const fetchUserRole = async (email) => {
+    try {
+      const res = await axios.get(
+        `https://unischolar-server.vercel.app/users/role/${email}`
+      );
+      setUserRole(res.data?.role || "user");
+    } catch (error) {
+      console.error("Error fetching role:", error);
+      setUserRole(null);
+    }
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      if (currentUser?.email) {
+        await fetchUserRole(currentUser.email);
+      } else {
+        setUserRole(null);
+      }
       setLoading(false);
-
-    
-
-      // if (currentUser?.email) {
-      //   try {
-      //     await axios.post("https://unischolar-server.vercel.app/users", {
-      //       name: currentUser.displayName || "No Name",
-      //       email: currentUser.email,
-      //       // You can add `role: "moderator"` manually here for testing, or let the backend default it
-      //     });
-      //     // console.log("User sent to DB:", data);
-      //   } catch (error) {
-      //     console.error(" Failed to send user to DB:", error);
-      //   }
-      // }
     });
 
     return () => unsubscribe();
@@ -69,6 +72,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     user,
+    userRole, // expose role
     loading,
     register,
     login,
@@ -76,6 +80,7 @@ const AuthProvider = ({ children }) => {
     googleLogin,
     updateUserProfile,
   };
+
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
