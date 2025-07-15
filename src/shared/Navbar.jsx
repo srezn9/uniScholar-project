@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router"; 
+import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Contexts/AuthContext";
 import Swal from "sweetalert2";
 
@@ -70,7 +70,7 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      {user && (
+      {userRole === "user" && (
         <li>
           <NavLink
             to="/userDashboard"
@@ -85,7 +85,7 @@ const Navbar = () => {
         </li>
       )}
 
-      {(userRole === "moderator" || userRole === "admin") && (
+      {userRole === "moderator" && (
         <li>
           <NavLink
             to="/moderatorDashboard"
@@ -180,34 +180,21 @@ const Navbar = () => {
 
       <div className="navbar-end hidden lg:flex items-center gap-4">
         {user ? (
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
+          <div className="flex items-center gap-4">
+            <img
+              src={user.photoURL || "/default-avatar.png"}
+              alt="Profile"
+              className="w-12 h-10 rounded-full "
+            />
+            <span className="font-semibold text-sm text-primary">
+              {user.displayName || user.email}
+            </span>
+            <button
+              onClick={handleLogout}
+              className="btn btn-sm bg-secondary text-white"
             >
-              <div className="w-10 rounded-full">
-                <img
-                  src={user.photoURL}
-                  alt={user.displayName}
-                  title={user.displayName || "User"}
-                />
-              </div>
-            </div>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
-            >
-              <li className="text-center font-semibold">{user.displayName}</li>
-              <li>
-                <button
-                  onClick={handleLogout}
-                  className="btn bg-secondary text-white w-full"
-                >
-                  Logout
-                </button>
-              </li>
-            </ul>
+              Logout
+            </button>
           </div>
         ) : (
           <>
