@@ -68,7 +68,7 @@ It supports role-based dashboards for users, moderators, and administrators, and
 ## 🚀 Setup & Run Locally
 
 ```bash
-git clonehttps://github.com/Programming-Hero-Web-Course4/b11a12-client-side-srezn9
+git clone https://github.com/srezn9/uniScholar-project.git
 cd unischolar-client
 npm install
 npm run dev
