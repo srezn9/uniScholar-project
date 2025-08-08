@@ -69,7 +69,7 @@ It supports role-based dashboards for users, moderators, and administrators, and
 
 ```bash
 git clone https://github.com/srezn9/uniScholar-project.git
-cd unischolar-client
+cd unischolar-project
 npm install
 npm run dev
 ```
