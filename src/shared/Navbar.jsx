@@ -50,7 +50,7 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "underline text-secondary font-semibold"
+              ? "underline text-[#B25D5D] font-semibold"
               : "font-semibold"
           }
         >
@@ -62,7 +62,7 @@ const Navbar = () => {
           to="/allScholarship"
           className={({ isActive }) =>
             isActive
-              ? "underline text-secondary font-semibold"
+              ? "underline text-[#B25D5D] font-semibold"
               : "font-semibold"
           }
         >
@@ -76,7 +76,7 @@ const Navbar = () => {
             to="/userDashboard"
             className={({ isActive }) =>
               isActive
-                ? "underline text-secondary font-semibold"
+                ? "underline text-[#B25D5D] font-semibold"
                 : "font-semibold"
             }
           >
@@ -91,7 +91,7 @@ const Navbar = () => {
             to="/moderatorDashboard"
             className={({ isActive }) =>
               isActive
-                ? "underline text-secondary font-semibold"
+                ? "underline text-[#B25D5D] font-semibold"
                 : "font-semibold"
             }
           >
@@ -106,7 +106,7 @@ const Navbar = () => {
             to="/adminDashboard"
             className={({ isActive }) =>
               isActive
-                ? "underline text-secondary font-semibold"
+                ? "underline text-[#B25D5D] font-semibold"
                 : "font-semibold"
             }
           >
@@ -119,7 +119,7 @@ const Navbar = () => {
       <li>
         <a
           href="#faq"
-          className="font-semibold hover:underline text-secondary cursor-pointer"
+          className="font-semibold hover:underline text-[#B25D5D] cursor-pointer"
         >
           FAQ
         </a>
@@ -128,7 +128,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar fixed top-0 left-0 z-50 w-full shadow-sm bg-gradient-to-r from-[#A3B18A] to-[#B25D5D]">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -168,9 +168,9 @@ const Navbar = () => {
             )}
           </ul>
         </div>
-        <h2 className="text-xl font-bold text-primary">
+        <h2 className="text-xl font-bold text-[#2D2A32]">
           <span className="inline-block -rotate-[10deg]">Uni</span>
-          <span className="text-secondary">Scholar</span>
+          <span className="text-[#B25D5D]">Scholar</span>
         </h2>
       </div>
 
@@ -179,31 +179,56 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end hidden lg:flex items-center gap-4">
+        {/* Theme Toggle */}
+        <label className="swap swap-rotate">
+          {/* this hidden checkbox controls the state */}
+          <input type="checkbox" className="theme-controller" value="dark" />
+
+          {/* sun icon */}
+          <svg
+            className="swap-off fill-current w-6 h-6 text-yellow-500"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path d="M5.64 17.657l1.414-1.414a8 8 0 0011.314-11.314l1.414-1.414A10 10 0 015.64 17.657z"></path>
+          </svg>
+
+          {/* moon icon */}
+          <svg
+            className="swap-on fill-current w-6 h-6 text-gray-300"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <path d="M21.64 13a9 9 0 01-8.64 6 9 9 0 010-18 9 9 0 018.64 6z"></path>
+          </svg>
+        </label>
+
+        {/* User/Auth */}
         {user ? (
           <div className="flex items-center gap-4">
             <img
               src={user.photoURL || "/default-avatar.png"}
               alt="Profile"
-              className="w-12 h-10 rounded-full "
+              className="w-10 h-10 rounded-full "
             />
-            <span className="font-semibold text-sm text-primary">
+            <span className="font-semibold text-sm">
               {user.displayName || user.email}
             </span>
             <button
               onClick={handleLogout}
-              className="btn btn-sm bg-secondary text-white"
+              className="btn btn-sm bg-[#B25D5D] text-white"
             >
               Logout
             </button>
           </div>
         ) : (
           <>
-            <Link to="/login" className="btn bg-secondary text-white">
+            <Link to="/login" className="btn bg-[#B25D5D] text-white">
               Login
             </Link>
             <Link
               to="/register"
-              className="rounded-2xl btn bg-secondary text-white"
+              className="rounded-2xl btn bg-[#B25D5D] text-white"
             >
               Register
             </Link>

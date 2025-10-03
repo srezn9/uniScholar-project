@@ -198,17 +198,17 @@ const Checkout = () => {
           <input
             value={scholarship?.universityName}
             readOnly
-            className="input input-bordered w-full bg-gray-100"
+            className="input input-bordered w-full bg-gray-500"
           />
           <input
             value={scholarship?.scholarshipCategory}
             readOnly
-            className="input input-bordered w-full bg-gray-100"
+            className="input input-bordered w-full bg-gray-500"
           />
           <input
             value={scholarship?.subjectName}
             readOnly
-            className="input input-bordered w-full bg-gray-100"
+            className="input input-bordered w-full bg-gray-500"
           />
 
           <button type="submit" className="btn btn-secondary w-full">

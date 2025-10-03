@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { AiFillStar } from "react-icons/ai";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
@@ -11,6 +10,7 @@ import "swiper/css/pagination";
 
 import ReviewCard from "../components/ReviewCard";
 import Loader from "../shared/Loader";
+import { FaStar } from "react-icons/fa";
 
 // Fetch single scholarship by ID
 const fetchScholarshipById = async (id) => {
@@ -57,9 +57,14 @@ const ScholarshipDetails = () => {
     scholarshipDescription,
     reviews,
   } = data;
+  console.log("Scholarship data:", data);
+  console.log("universityName:", universityName);
+
+
 
   return (
-    <div className="p-6 max-w-4xl mx-auto bg-white rounded-xl shadow-md space-y-6">
+  <div className="bg-base-100 pt-24 pb-16 min-h-screen">
+    <div className="max-w-4xl mx-auto rounded-xl shadow-md p-6 space-y-6">
       {/* University Info */}
       <h2 className="text-2xl font-bold mb-4">{universityName}</h2>
       <img
@@ -67,7 +72,7 @@ const ScholarshipDetails = () => {
         alt={universityName}
         className="h-60 object-cover mb-4 w-full rounded"
       />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-500">
         <p>
           <strong>Location:</strong> {location?.city}, {location?.country}
         </p>
@@ -96,18 +101,17 @@ const ScholarshipDetails = () => {
         </p>
         <p className="flex items-center gap-1">
           <strong>Rating:</strong>
-          <AiFillStar className="text-yellow-500" />
+          <FaStar className="text-yellow-500" />
           {calculateAverageRating(reviews)}
         </p>
       </div>
 
       {/* Description */}
-      <p className="mt-4 text-gray-700">{scholarshipDescription}</p>
+      <p className="mt-4 text-gray-600">{scholarshipDescription}</p>
 
       {/* Apply Button */}
-
       <button
-        onClick={() => navigate(`/checkout/${id}`)} // navigate to checkout page for this scholarship
+        onClick={() => navigate(`/checkout/${id}`)}
         className="mt-5 btn btn-secondary w-full"
       >
         Apply for Scholarship
@@ -130,7 +134,7 @@ const ScholarshipDetails = () => {
               }}
               pagination={{ clickable: true }}
               spaceBetween={20}
-              slidesPerView={1} // ✅ Always show one slide
+              slidesPerView={1}
             >
               {reviews.map((review, idx) => (
                 <SwiperSlide key={idx}>
@@ -138,15 +142,15 @@ const ScholarshipDetails = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-
-            {/* Arrows */}
           </div>
         ) : (
           <p className="text-gray-500">No reviews yet.</p>
         )}
       </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default ScholarshipDetails;

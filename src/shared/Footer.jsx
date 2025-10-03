@@ -2,11 +2,11 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="footer footer-horizontal footer-center bg-accent text-primary p-10">
+    <footer className="footer footer-horizontal footer-center bg-gradient-to-r from-[#A3B18A] to-[#B25D5D] p-10">
       <aside>
-        <h2 className="text-xl font-bold text-primary">
+        <h2 className="text-xl font-bold text-[#2D2A32]">
           <span className="inline-block -rotate-[10deg]">Uni</span>
-          <span className="text-secondary">Scholar</span>
+          <span className="text-[#B25D5D]">Scholar</span>
         </h2>
         <p>
           Empowering students worldwide with access to trusted scholarships and

@@ -2,6 +2,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+
 @plugin "daisyui/theme" {
  
   default: true;
@@ -9,11 +10,17 @@
   --color-secondary: 	#B25D5D;
   --color-accent: #A3B18A;
   
-}
+},
+/* {
+  <html lang="en" data-theme="light">
+
+} */
+
 
 
 body{
   font-family: "Barlow", sans-serif;
+   /* background-color:#FAF9F6; */
 }
 
 html {

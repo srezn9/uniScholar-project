@@ -1,10 +1,11 @@
 import React from "react";
+import { FaStar } from "react-icons/fa";
 
 const ReviewCard = ({ review }) => {
   const { reviewerImage, reviewerName, reviewDate, ratingPoint, comments } = review;
 
   return (
-    <div className="p-5 h-full bg-white border border-blue-200 rounded-xl shadow-lg text-gray-800 transition-transform duration-300 hover:scale-[1.02]">
+    <div className="p-5 h-full border border-blue-200 rounded-xl shadow-lg text-gray-500 transition-transform duration-300 hover:scale-[1.02]">
       <div className="flex items-center mb-3">
         <img
           src={reviewerImage}
@@ -16,8 +17,8 @@ const ReviewCard = ({ review }) => {
           <p className="text-xs text-gray-500">{new Date(reviewDate).toLocaleDateString()}</p>
         </div>
       </div>
-      <p className="mb-2 font-semibold text-yellow-500">⭐ {ratingPoint}</p>
-      <p className="text-sm text-gray-700">{comments}</p>
+      <p className="mb-2 font-semibold text-yellow-500 flex items-center gap-1"><FaStar></FaStar> {ratingPoint}</p>
+      <p className="text-sm text-gray-600">{comments}</p>
     </div>
   );
 };

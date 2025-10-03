@@ -117,7 +117,7 @@ const AllScholarships = () => {
           {currentScholarships.map((item) => (
             <div
               key={item._id}
-              className="rounded-tl-3xl rounded-br-3xl p-4 shadow-xl hover:shadow-2xl transition duration-300 border border-accent bg-white flex flex-col"
+              className="rounded-tl-3xl rounded-br-3xl p-4 shadow-xl hover:shadow-2xl transition duration-300 border border-accent flex flex-col"
             >
               <img
                 src={item.universityLogo}

@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router";
 import Loader from "../shared/Loader";
+import { FaStar } from "react-icons/fa";
+import { GiGraduateCap } from "react-icons/gi"; 
 
 const TopScholarships = () => {
   const navigate = useNavigate();
@@ -23,15 +25,15 @@ const TopScholarships = () => {
 
   return (
     <div className="my-30 px-4">
-      <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-10">
-        🎓 Top Scholarships
+      <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-10 flex justify-center items-center gap-2 text-primary">
+        <GiGraduateCap /> Top Scholarships
       </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {scholarships.map((s) => (
           <div
             key={s._id}
-            className="bg-white shadow-md border border-gray-200 rounded-tl-3xl rounded-br-3xl overflow-hidden hover:shadow-xl transition duration-300 group"
+            className="shadow-md border border-gray-200 rounded-tl-3xl rounded-br-3xl overflow-hidden hover:shadow-xl transition duration-300 group"
           >
             
             <div className="relative">
@@ -47,10 +49,10 @@ const TopScholarships = () => {
 
             
             <div className="p-5 space-y-1">
-              <h3 className="text-xl font-bold text-gray-800">{s.universityName}</h3>
+              <h3 className="text-xl font-bold text-gray-600">{s.universityName}</h3>
               <p className="text-sm text-gray-600">{s.subjectName}</p>
               <p className="text-sm text-gray-500">
-                📍 {s.location.city}, {s.location.country}
+                 {s.location.city}, {s.location.country}
               </p>
               <p className="text-sm text-gray-500">
                 Deadline:{" "}
@@ -60,8 +62,8 @@ const TopScholarships = () => {
                 Application Fee:{" "}
                 <span className="text-emerald-600 font-semibold">${s.applicationFees}</span>
               </p>
-              <p className="text-sm text-yellow-600">
-                ⭐ {calculateAverageRating(s.reviews)}
+              <p className="text-sm text-yellow-600 flex items-center gap-1">
+                <FaStar /> {calculateAverageRating(s.reviews)}
               </p>
 
               
@@ -79,7 +81,7 @@ const TopScholarships = () => {
       <div className="text-center mt-10">
         <button
           onClick={() => navigate("/allScholarship")}
-          className="bg-secondary text-white px-6 py-2 rounded-full hover:bg-[#994B4B] transition"
+          className="bg-[#B25D5D] text-white px-6 py-2 rounded-full hover:bg-[#994B4B] transition"
         >
           View All Scholarships
         </button>
